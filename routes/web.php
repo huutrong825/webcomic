@@ -280,8 +280,11 @@ Route::group(
         Route::get('/profile', ['uses'=>'ViewerController@profile']);
 
         Route::get('/loai-truyen/{req}', ['uses'=>'HomePageController@getType']);
+        Route::get('/info-page', ['uses'=>'HomePageController@infoPage']);
 
         Route::get('/add-store/{id}', ['uses'=>'StoreController@addStore']);
         Route::get('/kho-luu-tru', ['uses'=>'StoreController@getStore']);
+
+        
     }
 );

@@ -219,15 +219,15 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Xếp hạng <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Top Ngày</a>
-                                    <a href="checkout.html" class="dropdown-item">Top Tuần</a>
-                                    <a href="cart.html" class="dropdown-item">Top Tháng</a>
-                                    <a href="checkout.html" class="dropdown-item">Yêu Thích</a>
-                                    <a href="cart.html" class="dropdown-item">Theo dõi</a>
-                                    <a href="checkout.html" class="dropdown-item">Lượt xem</a>
+                                    <a href="#" class="dropdown-item">Top Ngày</a>
+                                    <a href="#" class="dropdown-item">Top Tuần</a>
+                                    <a href="#" class="dropdown-item">Top Tháng</a>
+                                    <a href="#" class="dropdown-item">Yêu Thích</a>
+                                    <a href="#" class="dropdown-item">Theo dõi</a>
+                                    <a href="#" class="dropdown-item">Lượt xem</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Thông tin</a>
+                            <a href="{{ asset('/info-page')  }}" class="nav-item nav-link">Thông tin</a>
                         </div>                        
                     </div>
                 </nav>
@@ -277,14 +277,13 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                        <h5 class="text-secondary text-uppercase mb-4">My Homepage</h5>
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-secondary mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Manga</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Truyện chữ</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đoản văn</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-secondary mb-2" href="{{ asset('/loai-truyen/2') }}"><i class="fa fa-angle-right mr-2"></i>Manga</a>
+                            <a class="text-secondary mb-2" href="{{ asset('/loai-truyen/1') }}"><i class="fa fa-angle-right mr-2"></i>Truyện chữ</a>
+                            <a class="text-secondary mb-2" href="{{ asset('/loai-truyen/1') }}"><i class="fa fa-angle-right mr-2"></i>Đoản văn</a>
+                            <a class="text-secondary" href="{{ asset('/info-page')  }}"><i class="fa fa-angle-right mr-2"></i>Thông tin</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
@@ -303,7 +302,7 @@
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-secondary">
                     Damme Truyen - Web đọc truyện online &copy; 2023 by
-                    <a class="text-primary" href="https://www.facebook.com/vu.jun.330">Dang Vu</a>
+                    <a class="text-primary" href="https://www.facebook.com/vu.jun.330">Trong Huu</a>
                 </p>
             </div>
         </div>

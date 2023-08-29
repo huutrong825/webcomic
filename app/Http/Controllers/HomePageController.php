@@ -158,4 +158,9 @@ class HomePageController extends Controller
 
         return view('HomePage.Find', compact('truyen', 'key'));
     }
+
+    public function infoPage()
+    {
+        return view("HomePage.InfoPage");
+    }
 }
