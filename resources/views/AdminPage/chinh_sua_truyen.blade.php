@@ -180,7 +180,7 @@
                                         <a class="btn btn-danger btn-user btAddProd" id="huy_them_chap">Hủy</a>
                                     </div>
                                 </form>
-                            </div>                            
+                            </div>
                             @endforeach
                         </div>
                     </div>

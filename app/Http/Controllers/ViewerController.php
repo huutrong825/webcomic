@@ -83,6 +83,7 @@ class ViewerController extends Controller
                         'name' => $randomNumber,
                         'email' => $req->email,
                         'password' => Hash::make($req->password),
+                        'avatar' => 'avatar.png',
                         'group_role'=> 3,
                     ]
                 );

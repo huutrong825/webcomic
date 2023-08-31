@@ -19,18 +19,34 @@ class StoreController extends Controller
 
             $store = Store_truyen::where('id_truyen', $id)
                 ->where('id_viewer', $user)->first();
+            $truyen = Truyen::where('id', $id)->first();
 
             if ($store) {
                 $store->delete();
+                if ($truyen->luot_theo_doi > 0) {
+                    $count = $truyen->luot_theo_doi - 1;
+                    $truyen->update(
+                        [
+                            'luot_theo_doi' => $count
+                        ]
+                    );
+                }
                 return response()->json(['message' => "Đã hủy theo dõi"]);
             } else {
-
-                Store_truyen::create(
+                $count = $truyen->luot_theo_doi + 1;
+                
+                $truyen->update(
                     [
-                        'id_truyen' => $id,
-                        'id_viewer' => $user
+                        'luot_theo_doi' => $count
                     ]
                 );
+
+                // Store_truyen::create(
+                //     [
+                //         'id_truyen' => $id,
+                //         'id_viewer' => $user
+                //     ]
+                // );
                 return response()->json(['message' => "Theo dõi thành công"]);
             }
         } else {

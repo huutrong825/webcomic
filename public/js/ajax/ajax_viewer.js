@@ -104,6 +104,48 @@ $(document).ready(function(){
         })
     });
  
+    $(document).on('click','#bt_comment', function(e)
+    {
+        e.preventDefault();
+        alertify.success('Hoạt d');
+        $.ajax({
+            url : '/post-comment',
+            type : 'post',
+            data : new FormData($('#form_comment')[0]),
+            contentType: false,
+            processData: false,
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                
+                if (response.errors) {
+                    alertify.error(response.errors);
+                };
+                if (response.message) {
+                    alertify.success(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }; 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        })
+    });
 
 
 });

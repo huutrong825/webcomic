@@ -23,6 +23,6 @@ class Comment extends Model
 
     public function viewer()
     {
-        return $this->belongsTo(Viewer::class, 'id_viewer');
+        return $this->belongsTo(User::class, 'id_viewer');
     }
 }

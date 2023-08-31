@@ -29,7 +29,7 @@ class UsersController extends Controller
                         'last_login_at' => date('Y-m-d H:i:s')
                     ]
                 );
-                return redirect('/admin');
+                return view('AdminPage.Index');
             } else {
                 return redirect('/login')->with('error', 'Email hoặc mật khẩu không đúng');
             }
@@ -97,7 +97,7 @@ class UsersController extends Controller
     {
         Auth::logout();
 
-        return redirect('/login');
+        return redirect('/login-admin');
     }
 
     public function getProfile()
@@ -262,6 +262,7 @@ class UsersController extends Controller
             return response()->json(['errors' => $e->getMessage()], 404);
         }
     }
+    
     public function userPage()
     {
         return view('AdminPage.user_admin');

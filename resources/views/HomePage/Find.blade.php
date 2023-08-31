@@ -85,7 +85,7 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{{ asset('img_truyen/') }}/{{ $t->bia_truyen }}" alt="{{ $t->ten_truyen }}">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-bookmark" title="Lưu"></i></a>
+                                <a class="btn btn-outline-dark btn-square" id="{{ $t->id  }}" onclick="handleClick(event)"><i id="{{ $t->id  }}" class="fa fa-bookmark" title="Lưu"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart" title="Thích"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $t->id }}"><i class="fa fa-eye" title="Đọc"></i></a>
                             </div>
@@ -139,4 +139,47 @@
         </div>
     </div>
     <!-- Vendor End -->
+@endsection
+@section('scripts')
+
+<script>
+    function handleClick(event) {
+      var id = event.target.id;
+        $.ajax({
+            url:'/add-store/' + id,
+            type:'get',
+            // dataType: 'json',
+            // headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            // },
+            success: function(response)
+            {
+                if (response.errors) {
+                    alertify.error(response.errors);
+                };
+                if (response.message) {
+                    
+                    alertify.success(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }; 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 @endsection

@@ -133,8 +133,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/truyen/review-chap/{id}', ['uses'=>'ChapController@reviewChap']);
 
 
-Route::get('/login', ['uses'=>'UsersController@getLogin']);
-Route::post('/login', ['uses'=>'UsersController@postLogin']);
+Route::get('/login-admin', ['uses'=>'UsersController@getLogin']);
+Route::post('/login-admin', ['uses'=>'UsersController@postLogin']);
 Route::group(
     ['middleware'=>'AdminLogin', 'prefix'=>'admin'], function () {
 
@@ -243,10 +243,7 @@ Route::group(
             }
         );
         Route::get('/viewer', ['uses'=>'ViewerController@list']);
-        Route::get('/comment',
-        function () {
-            return view('AdminPage/Comment');}
-        );
+        Route::get('/comment', ['uses'=>'CommentController@list']);
         Route::get('/xep-hang',
         function () {
             return view('AdminPage/xep-hang');}
@@ -285,6 +282,6 @@ Route::group(
         Route::get('/add-store/{id}', ['uses'=>'StoreController@addStore']);
         Route::get('/kho-luu-tru', ['uses'=>'StoreController@getStore']);
 
-        
+        Route::post('/post-comment', ['uses'=>'CommentController@postComment']);
     }
 );

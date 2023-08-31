@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Store_truyen::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'id_viewer', 'id');
+    }
 }

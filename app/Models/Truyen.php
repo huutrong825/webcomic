@@ -14,7 +14,7 @@ class Truyen extends Model
 
     protected $fillable = [
         'ten_truyen', 'tac_gia', 'nhom_dich', 'loai_truyen', 'trang_thai',
-        'mo_ta', 'bia_truyen', 'ngay_dang'
+        'mo_ta', 'bia_truyen', 'ngay_dang', 'luot_theo_doi', 'luot_thich', 'luot_xem'
     ];
     
     public function chap()

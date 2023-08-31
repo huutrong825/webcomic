@@ -36,19 +36,19 @@
                 <div class="h-100 bg-light p-30">
                     <h3 style="text-align:center">{{ $t->ten_truyen }}</h3>
                     <div class="d-flex mb-3">
-                        <strong class="text-dark mr-3">Tác giả: {{ $t->tac_gia }}</strong>
+                        <strong class="text-dark mr-3">Tác giả: &emsp; {{ $t->tac_gia }}</strong>
                     </div>
                     <div class="d-flex mb-4">
-                        <strong class="text-dark mr-3">Trạng thái: {{ ($t->trang_thai) == 1 ? 'Đang cập nhật' : ($t->trang_thai == 1 ? 'Đã hoàn thành' : 'Trì hoãn')}} </strong>
+                        <strong class="text-dark mr-3">Trạng thái: &emsp; {{ ($t->trang_thai) == 1 ? 'Đang cập nhật' : ($t->trang_thai == 1 ? 'Đã hoàn thành' : 'Trì hoãn')}} </strong>
                     </div>
                     <div class="d-flex mb-4">
-                        <strong class="text-dark mr-3">Nhóm dịch: {{ $t->nhom_dich }}</strong>
+                        <strong class="text-dark mr-3">Nhóm dịch: &emsp; {{ $t->nhom_dich }}</strong>
                     </div>
                     <div class="d-flex mb-4">
-                        <strong class="text-dark mr-3">Lượt theo dõi: {{ $t->luot_theo_doi }}</strong>
+                        <strong class="text-dark mr-3">Lượt theo dõi: &emsp; {{ $t->luot_theo_doi }}</strong>
                     </div>
                     <div class="d-flex mb-4">
-                        <strong class="text-dark mr-3">Lượt thích: {{ $t->luou_thich }}</strong>
+                        <strong class="text-dark mr-3">Lượt thích: &emsp; {{ $t->luot_thich }}</strong>
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Thể loại: </strong>
@@ -61,7 +61,7 @@
                             <button class="btn btn-outline-success px-3"><i class="fa fa-book mr-1"></i>Đọc từ đầu</button>
                         </div>
                         <div class=" mr-3">
-                            <button class="btn btn-outline-danger px-3" id="{{ $t->id  }}" onclick="handleClick(event)"><i id="{{ $t->id  }}"><i class="fa fa-bookmark mr-1"></i> Theo dõi </button>
+                            <button class="btn btn-outline-danger px-3" id="{{ $t->id  }}" onclick="handleClick(event)"><i  id="{{ $t->id  }}" class="fa fa-bookmark mr-1"></i> Theo dõi </button>
                             <!-- <button class="btn btn-outline-danger px-3" style="display:none"><i class="fa fa-times mr-1"></i> Hủy theo dõi </button> -->
                         </div>
                         <div class=" mr-3">
@@ -111,9 +111,16 @@
                 <div class="bg-light p-30">
                     <div class="">
                         <h4 class="mb-4">Bình luận (1)</h4>
-                        <div class="comment media mb-4">
-                            <textarea class="form-control" style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;" ></textarea>
-                        </div>
+                        <form id="form_comment" method="post" >
+                            @csrf
+                            <div class="comment media mb-4">
+                                @foreach ($truyen as $t)
+                                <input id="id_truyen" name="id_truyen" value="{{ $t->id }}" hidden>
+                                @endforeach
+                                <textarea name="comment" class="form-control" style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;" ></textarea>
+                                <button id="bt_comment" class="btn btn-outline-success" style="margin-left: 10px; min-height:50px;"><i class="fa fa-paper-plane"></i></button>
+                            </div>
+                        </form>
                         <div class="media mb-4">
                             <img src="admin_img/avatar.png" alt="Image" class="img-fluid ">
                             <div class="media-body">
@@ -130,6 +137,7 @@
 
 @endsection
 @section('scripts')
+<!-- <script  src="{{ asset('js/ajax/ajax_viewer.js') }}"></script> -->
 
 <script>
     function handleClick(event) {
@@ -171,4 +179,6 @@
     }
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+
 @endsection

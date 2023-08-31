@@ -12,8 +12,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">FAQ</li>
+              <li class="breadcrumb-item"><a href="{{ asset('/admin') }}">Home</a></li>
+              <li class="breadcrumb-item active">Comment</li>
             </ol>
           </div>
         </div>
@@ -24,20 +24,20 @@
     <section class="container-fluid pb-5">
         <div class="row pb-0">
             <div class="col-12 " id="accordion">
+                @foreach( $comment as $c)
                 <div class="card card-primary card-outline ">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
                         <div class="card-header">
-                            <h4 class="card-title w-100">
-                                1. Lorem ipsum dolor sit amet
-                            </h4>
+                            <h4 class="card-title w-100">{{ $c->name }}</h4>
                         </div>
                     </a>
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                            {{ $c->noi_dung }}
                         </div>
                     </div>
                 </div>
+                @endforeach
                 <div class="card card-primary card-outline">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
                         <div class="card-header">

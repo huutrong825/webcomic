@@ -61,7 +61,7 @@
                                             {{session('error')}}
                                         </div>
                                     @endif
-                                    <form action="/login" class="user" method='post'>
+                                    <form action="/login-admin" class="user" method='post'>
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"

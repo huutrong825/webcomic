@@ -163,7 +163,7 @@ $(document).ready(function(){
         }
         console.log(data);
         $.ajax({
-            url : 'admin/update/theloai/' + id,
+            url : '/admin/update/theloai/' + id,
             type : 'post',
             data : data,
             dataType : 'json',

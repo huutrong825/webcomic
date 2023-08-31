@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminLogin
 {
@@ -18,9 +19,13 @@ class AdminLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            return $next($request);
+            if (Auth::User()->group_role != 3) {
+                return $next($request);
+            } else {
+                return redirect('/login-admin');
+            }
         } else {
-            return redirect('/login');
+            return redirect('/login-admin');
         }
     }
 }
