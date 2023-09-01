@@ -46,7 +46,10 @@ class ChapController extends Controller
 
     public function chapND($id)
     {
-        $chap = Chap::where('id', $id)->first();
+        $chap = DB::table('truyen')
+            ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
+            ->where('chap.id', $id)
+            ->select('truyen.ten_truyen', 'chap.id', 'chap.ten_chap', 'chap.id_truyen')->get();
         return view('AdminPage/noi-dung-truyen', compact('chap'));
     }
 
@@ -96,7 +99,10 @@ class ChapController extends Controller
 
     public function chapChu($id)
     {
-        $chap = Chap::where('id', $id)->first();
+        $chap =  DB::table('truyen')
+            ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
+            ->where('chap.id', $id)
+            ->select('truyen.ten_truyen', 'chap.id', 'chap.ten_chap', 'chap.id_truyen')->get();
         return view('AdminPage/ND_truyen_chu', compact('chap'));
     }
 
@@ -105,10 +111,10 @@ class ChapController extends Controller
         Chap_noi_dung::create(
             [
                 'id_chap' => $id,
-                'noi_dung' => $r
+                'noi_dung' => $r->nameChap
             ]
         );
-        
+
         return response()->json(
             [
                 'message' => 'Thêm nội dung thành công'

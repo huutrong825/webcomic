@@ -110,7 +110,7 @@
             <div class="col">
                 <div class="bg-light p-30">
                     <div class="">
-                        <h4 class="mb-4">Bình luận (1)</h4>
+                        <h4 class="mb-4">Bình luận ({{ $count }})</h4>
                         <form id="form_comment" method="post" >
                             @csrf
                             <div class="comment media mb-4">
@@ -121,19 +121,58 @@
                                 <button id="bt_comment" class="btn btn-outline-success" style="margin-left: 10px; min-height:50px;"><i class="fa fa-paper-plane"></i></button>
                             </div>
                         </form>
+                        @foreach( $comment as $cm)
                         <div class="media mb-4">
-                            <img src="admin_img/avatar.png" alt="Image" class="img-fluid ">
+                            <img src="{{ asset('img/') }}/{{ $cm->avatar }}" alt="Image" class="img-fluid ">
                             <div class="media-body">
-                                <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                <h6>{{ $cm->name }}<small> - <i>{{ $cm->ngay_dang }}</i></small></h6>
+                                <p>{{ $cm->noi_dung }}</p>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Shop Detail End -->
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    <div class="bg-light p-4">
+                        <a href="#">
+                            <img class="s-10" src="{{ asset('img_truyen/kimetsu_no_yaiba.jpg') }}" alt="">
+                        </a>
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/tat_da.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/thien_quan_tu_phuc.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/hay_khien_toi_ghet_cau.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/ma_dao_to_su.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/tham_thang.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/nguoi_la_ben_bo_bien.jpg') }}" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img class="s-10" src="{{ asset('img_truyen/da_tung_la_anh.jpg') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
 
 @endsection
 @section('scripts')

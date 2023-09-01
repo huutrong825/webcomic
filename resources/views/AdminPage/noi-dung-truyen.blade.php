@@ -36,22 +36,29 @@
     </div>
 </div>
 </form> -->
+
 <div class="card shadow ">
     <div style="text-align:center">
-        <h2> Dạ Ký </h2>
-        <h4> Chap 1 </h4>
+        @foreach ($chap as $ch)
+            <h2> {{ $ch->ten_truyen }} </h2>
+            <h4> {{ $ch->ten_chap }} </h4>
+        @endforeach
     </div>
 </div>
+</br>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Hình ảnh sản phẩm :  </h6>
     </div>
     <div class="card-body">
+        @foreach ($chap as $ch)
         <div class="table-responsive col-sm">
-            <input type="hidden" class="form-control form-control-user" id='idDrop' value="{{ $chap->id }}">
-            <form method='post' action="/truyen/chap/{{ $chap->id }}" class="dropzone" id="DropzoneForm" name="DropzoneForm" enctype="multipart/form-data" >
+            
+            <input type="hidden" class="form-control form-control-user" id='idDrop' value="{{ $ch->id }}">            
+            <form method='post' action="/truyen/chap/{{ $ch->id }}" class="dropzone" id="DropzoneForm" name="DropzoneForm" enctype="multipart/form-data" >
                 @csrf
             </form>
+            
             <br />
             <br />
             
@@ -61,7 +68,8 @@
             <br />
         </div>
             <a  class="btn btn-primary btn-sm" id="btDrop" title="Click to drop"><i class="fas fa-cloud-upload"></i>Xác nhận</a>
-            <a href='/truyen-tranh/{{ $chap->id_truyen }}' class="btn btn-danger btn-sm"  title="Click to back"><i class="fas fa-cloud-upload"></i>Trở lại</a>
+            <a href='/admin/truyen-tranh/{{ $ch->id_truyen }}' class="btn btn-danger btn-sm"  title="Click to back"><i class="fas fa-cloud-upload"></i>Trở lại</a>
+        @endforeach
     </div>
     
 </div>

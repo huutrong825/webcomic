@@ -107,7 +107,7 @@ $(document).ready(function(){
     $(document).on('click','#bt_comment', function(e)
     {
         e.preventDefault();
-        alertify.success('Hoạt d');
+        // alertify.success('Hoạt d');
         $.ajax({
             url : '/post-comment',
             type : 'post',

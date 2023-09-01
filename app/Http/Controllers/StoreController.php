@@ -41,12 +41,12 @@ class StoreController extends Controller
                     ]
                 );
 
-                // Store_truyen::create(
-                //     [
-                //         'id_truyen' => $id,
-                //         'id_viewer' => $user
-                //     ]
-                // );
+                Store_truyen::create(
+                    [
+                        'id_truyen' => $id,
+                        'id_viewer' => $user
+                    ]
+                );
                 return response()->json(['message' => "Theo dõi thành công"]);
             }
         } else {

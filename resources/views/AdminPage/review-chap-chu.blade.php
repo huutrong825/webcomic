@@ -13,16 +13,13 @@
     <div class="card-body">
         <div class="table-responsive col-sm">
             @foreach ($noidung as $n)
-            <div>{{ $n->noi_dung }}</div>
+            <div><?php echo $n->noi_dung ?></div>
             @endforeach
         </div>
             <a href='' class="btn btn-danger btn-sm"  title="Click to back"><i class="fas fa-cloud-upload"></i>Trở lại</a>
     </div>
     
 </div>
-
-
-
 @endsection
 
 @section('script')

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
@@ -20,6 +22,38 @@ class CommentController extends Controller
 
     public function postComment(Request $r)
     {
-        dd($r->all());
+        // dd($r->all());
+        if (Auth::check()) {
+
+            $messages = [
+                'comment.required' => 'Bình luận bắt buộc nhập',
+                'comment.min' => 'Bình luận ít nhất 6 ký tự',
+            ];
+
+            $v = Validator::make(
+                $r->all(),
+                [
+                    'comment' => 'required|min:6',
+                ], $messages
+            );
+         
+            if ($v->fails()) {
+                return response()->json(['errors' => $v->errors()], 422);
+            } else {
+                Comment::create(
+                    [
+                        'id_truyen' => $r->id_truyen,
+                        'id_viewer' => Auth::id(),
+                        'noi_dung' => $r->comment,
+                        'id_chap' => 0,
+                        'ngay_dang' => date('Y-m-d H:i:s'),
+                    ]
+                );
+                return response()->json(['message' => "Bình luận thành công"]);
+            }
+
+        } else {
+            return response()->json(['errors' => "Phải đăng nhập"]);
+        }
     }
 }

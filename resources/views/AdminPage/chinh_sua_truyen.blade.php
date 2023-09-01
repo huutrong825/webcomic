@@ -48,10 +48,10 @@
                             <button id="bt-save2" class="btn btn-outline-success" style="margin-left: 10px; padding: 2px 4px;display:none;"><i class="fa fa-save" ></i></button>
                         </div>
                         <div class="d-flex mb-4">
-                            <strong class="text-dark mr-3">Lượt theo dõi: Đang cập nhật</strong>
+                            <strong class="text-dark mr-3">Lượt theo dõi: &emsp; {{ $t->luot_theo_doi }}</strong>
                         </div>
                         <div class="d-flex mb-4">
-                            <strong class="text-dark mr-3">Lượt thích: Đang cập nhật</strong>
+                            <strong class="text-dark mr-3">Lượt thích: &emsp; {{ $t->luot_thich }}</strong>
                         </div>
                         
                         <div class="d-flex mb-4">
@@ -126,7 +126,7 @@
                                         @endif
                                     </div>
                                     <span class=" ">
-                                        @if($tr->loai_truyen = 2)
+                                        @if($tr->loai_truyen == 2)
                                             <a href="/admin/truyen/review-chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-eye"></i></a>
                                         @else
                                             <a href="/admin/truyen-chu/review-chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-eye"></i></a>

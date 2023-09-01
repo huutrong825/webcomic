@@ -66,27 +66,64 @@ class HomePageController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('HomePage.Detail', compact('truyen', 'TLoai', 'chap'));
+        $comment = DB::table('comment')->join('users', 'comment.id_viewer', '=', 'users.id')
+            ->where('id_truyen', $id)->whereNull('comment.deleted_at')
+            ->select('comment.*', 'users.name', 'users.avatar')->orderBy('comment.id', 'desc')->get();
+
+        $count = DB::table('comment')->join('users', 'comment.id_viewer', '=', 'users.id')
+            ->where('id_truyen', $id)->whereNull('comment.deleted_at')
+            ->count('comment.id');
+
+        return view('HomePage.Detail', compact('truyen', 'TLoai', 'chap', 'comment', 'count'));
     }
 
     public function reviewChap($id)
     {
         $img = Chap_noi_dung::where('id_chap', $id)->get();
+        
 
         $title = DB::table('truyen')
             ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
             ->where('chap.id', $id)
             ->select('truyen.ten_truyen', 'chap.ten_chap', 'chap.id_truyen')
             ->groupBy('truyen.ten_truyen', 'chap.ten_chap', 'chap.id_truyen')->get();
+
+        $loai = DB::table('truyen')
+            ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
+            ->where('chap.id', $id)
+            ->select('truyen.loai_truyen')->first();
             
         $chap = DB::select('
             SELECT *
             FROM chap
-            WHERE id_truyen = (SELECT id_truyen FROM chap WHERE id = 1)'
+            WHERE id_truyen = (SELECT id_truyen FROM chap WHERE id = '. $id .')'
         );
 
-        return view('HomePage/Read', compact('img', 'title', 'chap'));
+        if ($loai->loai_truyen == 2) {
+            return view('HomePage/Read', compact('img', 'title', 'chap'));
+        } else {
+            return view('HomePage/Read_chu', compact('img', 'title', 'chap'));
+        }
     }
+
+    // public function reviewChapChu($id)
+    // {
+    //     $img = Chap_noi_dung::where('id_chap', $id)->get();
+
+    //     $title = DB::table('truyen')
+    //         ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
+    //         ->where('chap.id', $id)
+    //         ->select('truyen.ten_truyen', 'chap.ten_chap', 'chap.id_truyen')
+    //         ->groupBy('truyen.ten_truyen', 'chap.ten_chap', 'chap.id_truyen')->get();
+            
+    //     $chap = DB::select('
+    //         SELECT *
+    //         FROM chap
+    //         WHERE id_truyen = (SELECT id_truyen FROM chap WHERE id = 1)'
+    //     );
+
+    //     return view('HomePage/Read_chu', compact('img', 'title', 'chap'));
+    // }
 
     public function layTheoTL($id)
     {
