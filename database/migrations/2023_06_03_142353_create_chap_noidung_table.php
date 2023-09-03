@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->increments('id');
                 $table->integer('id_chap');
                 // $table->foreignId('id_chap')->constrained('chap');
-                $table->text('noi_dung');
+                $table->longText('noi_dung');
                 $table->timestamps();
                 $table->softDeletes();
             }

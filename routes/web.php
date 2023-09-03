@@ -242,7 +242,12 @@ Route::group(
                 Route::get('/fetch', ['uses'=>'UsersController@listUser']);
             }
         );
+
         Route::get('/viewer', ['uses'=>'ViewerController@list']);
+        Route::get('/get-viewer/{id}', ['uses'=>'ViewerController@getUser']);
+        Route::get('/block-viewer/{id}', ['uses'=>'ViewerController@blockUser']);
+        Route::get('/delete-viewer/{id}', ['uses'=>'ViewerController@deleteUser']);
+
         Route::get('/comment', ['uses'=>'CommentController@list']);
         Route::get('/xep-hang',
         function () {

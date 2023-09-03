@@ -13,7 +13,9 @@
                         <thead>
                             <tr>
                                 <th >STT</th>
-                                <th>Danh sách thể loại</th>
+                                <th>Ảnh bìa</th>
+                                <th> Tên truyện</th>
+                                <th>Loại banner</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -38,8 +40,10 @@
                         <thead>
                             <tr>
                                 <th >STT</th>
-                                <th>Danh sách loại truyện</th>
+                                <th>Email</th>
+                                <th>Tên web</th>
                                 <th></th>
+                            </tr>   
                         </thead>
                         <tbody>
                         </tbody>

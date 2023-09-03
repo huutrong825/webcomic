@@ -29,9 +29,9 @@ class UsersController extends Controller
                         'last_login_at' => date('Y-m-d H:i:s')
                     ]
                 );
-                return view('AdminPage.Index');
+                return redirect('/admin');
             } else {
-                return redirect('/login')->with('error', 'Email hoặc mật khẩu không đúng');
+                return redirect('/login-admin')->with('error', 'Email hoặc mật khẩu không đúng');
             }
         } catch (Exception $e) {
             return $e->getMessage();

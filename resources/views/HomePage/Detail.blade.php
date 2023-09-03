@@ -53,7 +53,7 @@
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Thể loại: </strong>
                         @foreach($TLoai as $tl)
-                            <div class="chip">{{ $tl->the_loai }}</div>
+                            <a href="{{ asset('/search') }}/{{ $tl->id }}" class="chip">{{ $tl->the_loai }}</a>
                         @endforeach
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
@@ -97,7 +97,7 @@
                             @foreach( $chap as $c)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <a href="{{ asset('/truyen') }}/{{ $c->id }}">{{ $c->ten_chap }}</a>
-                                    <span class="badge ">{{ $c->ngay_dang }}</span>
+                                    <span class="badge "><?php echo date( "m/d/Y", strtotime($c->ngay_dang)); ?> </span>
                                 </li>
                             @endforeach
                         </ul

@@ -49,10 +49,10 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">                                
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Khóa người dùng
+                                <a href="#" class="btn btn-sm btn-primary bt-Block">
+                                    <i class="fas fa-user "></i> Khóa người dùng
                                 </a>
-                                <a href="#" class="btn btn-sm btn-danger" title="Xóa">
+                                <a href="#" class="btn btn-sm btn-danger " title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
@@ -67,8 +67,8 @@
                         <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-7">
-                                    <h3 class="lead" ><b style="font-weight: bolder;"> {{ $v->name }}</b></h3>
-                                    <p class="text-muted text-sm">Tên viewer  </p>
+                                    <h3 class="lead" ><b style="font-weight: bolder;" > {{ $v->name }}</b></h3>
+                                    <!-- <a class="text-muted text-sm" id="tenUser" value="{{ $v->name }}">Tên viewer  </a> -->
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: {{ $v->email }}</li>
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-birthday-cake"></i></span> Ngày sinh : {{ $v->birth }}</li>
@@ -81,12 +81,12 @@
                         </div>
                         <div class="card-footer">
                         <div class="text-right">
-                            <a href="#" class="btn btn-sm btn-primary">
+                            <a  class="btn btn-sm btn-primary bt-Block" value="{{ $v->id }}" >
                                     <i class="fas fa-user"></i> Khóa người dùng
                                 </a>
-                                <a href="#" class="btn btn-sm btn-danger" title="Xóa">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                            <a value="{{ $v->id }}" class="btn btn-sm btn-danger bt-Delete" title="Xóa">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </div>
                         </div>
                     </div>
@@ -113,7 +113,48 @@
         </section>
         <!-- /.content -->
     </div>
+
+    <!-- Block Modal-->
+<div class="modal fade" id="BlockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+            </div>
+            <div class="">
+                <input type="hidden" class="form-control form-control-user" id='idBlock' >
+            </div>
+            <div class="modal-body">Xác nhận khóa/mở người dùng <span id='nameBlock' style="color:blue"></span></div>
+            <div class="modal-footer">
+                <a class="btn btn-primary btDSubmitBlock">Xác nhận</a>
+                <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+            </div>
+            <div class="">
+                <input type="hidden" class="form-control form-control-user" id='idDelete' >
+            </div>
+            <div class="modal-body">Xác nhận xóa người dùng <span id='nameDelete' style="color:blue"></span></div>
+            <div class="modal-footer">
+                <a class="btn btn-primary btDSubmitDelete">Xác nhận</a>
+                <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
+<script src="{{ asset('js/ajax/ajax_user_viewer.js') }}"></script>
 @endsection

@@ -120,16 +120,16 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class=" ">
                                         @if($tr->loai_truyen == 2)
-                                        <a href="/admin/truyen/chap/{{ $c->id }}">{{ $c->ten_chap }}</a>
+                                        <a href="/admin/truyen/review-chap/{{ $c->id }}">{{ $c->ten_chap }}</a>
                                         @else
-                                        <a href="/admin/truyen-chu/them-nd/{{ $c->id }}">{{ $c->ten_chap }}</a>
+                                        <a href="/admin/truyen-chu/review-chap/{{ $c->id }}">{{ $c->ten_chap }}</a>
                                         @endif
                                     </div>
                                     <span class=" ">
                                         @if($tr->loai_truyen == 2)
-                                            <a href="/admin/truyen/review-chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-eye"></i></a>
+                                            <a href="/admin/truyen/chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-pen"></i></a>
                                         @else
-                                            <a href="/admin/truyen-chu/review-chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-eye"></i></a>
+                                            <a href="/admin/truyen-chu/them-nd/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-pen"></i></a>
                                         @endif
                                         <a href="" style="color:red" tittle="Xóa chap"><i class="fa fa-trash"></i></a>
                                     </span>                                

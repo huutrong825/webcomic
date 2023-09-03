@@ -17,10 +17,10 @@ return new class extends Migration
                 $table->integer('id_viewer');
                 // $table->foreignId('id_viewer')->constrained('user_guests');
                 $table->integer('id_truyen');
-                $table->integer('id_chap');
+                $table->integer('id_chap')->nullable();
                 // $table->foreignId('id_chap')->constrained('chap');
                 $table->string('noi_dung', 255)->nullable();
-                $table->date('ngay_dang', 25);
+                $table->timestamp('ngay_dang');
                 $table->timestamps();
                 $table->softDeletes();
             }

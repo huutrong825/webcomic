@@ -55,7 +55,7 @@
         <div class="table-responsive col-sm">
             
             <input type="hidden" class="form-control form-control-user" id='idDrop' value="{{ $ch->id }}">            
-            <form method='post' action="/truyen/chap/{{ $ch->id }}" class="dropzone" id="DropzoneForm" name="DropzoneForm" enctype="multipart/form-data" >
+            <form method='post' action="/admin/truyen/chap/{{ $ch->id }}" class="dropzone" id="DropzoneForm" name="DropzoneForm" enctype="multipart/form-data" >
                 @csrf
             </form>
             

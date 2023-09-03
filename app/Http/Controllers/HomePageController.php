@@ -131,7 +131,7 @@ class HomePageController extends Controller
         $truyen = DB::select('
             select t.*, m.ten_chap
             FROM truyen t
-            join truyen_theloai on t.id = truyen_theloai.id_truyen and truyen_theloai.id_theloai = '. $id. '
+            join truyen_theloai on t.id = truyen_theloai.id_truyen and truyen_theloai.deleted_at is Null and truyen_theloai.id_theloai = '. $id. '
             LEFT JOIN (SELECT * FROM  chap c JOIN (
                 SELECT h.id_truyen as i, MAX(h.ngay_dang) as d
                 FROM chap h

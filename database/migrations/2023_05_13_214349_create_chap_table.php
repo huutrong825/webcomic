@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->increments('id');
                 $table->string('ten_chap', 255);
                 $table->integer('id_truyen');
-                $table->date('ngay_dang', 25);
+                $table->timestamp('ngay_dang');
                 // $table->foreignId('id_truyen')->constrained('truyen');
                 $table->timestamps();
                 $table->softDeletes();

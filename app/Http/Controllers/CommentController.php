@@ -15,14 +15,15 @@ class CommentController extends Controller
     {
         $comment = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.id_viewer')
-            ->select('comment.*', 'users.name')->get();
+            ->join('truyen', 'truyen.id', '=', 'comment.id_truyen')
+            ->select('comment.*', 'users.name', 'truyen.ten_truyen')->get();
         
         return view('AdminPage.Comment', compact('comment'));
     }
 
     public function postComment(Request $r)
     {
-        // dd($r->all());
+        
         if (Auth::check()) {
 
             $messages = [

@@ -20,6 +20,16 @@ class ViewerController extends Controller
         return view('AdminPage/viewer', compact('viewer'));
     }
 
+    public function getUser($id)
+    {
+        $viewer = User::where('id', $id)->first();
+        return response()->json(
+            [
+                'viewer' => $viewer
+            ]
+        );
+    }
+
     public function postLogin(Request $req)
     {
         $remember = $req->customCheck;
@@ -48,6 +58,58 @@ class ViewerController extends Controller
             return $e->getMessage();
         } catch (QueryException $e) {
             return $e->getMessage();
+        }
+    }
+
+    public function blockUser($id)
+    {
+        $viewer = User::where('id', $id)->first();
+
+        if ($viewer) {
+            if ($viewer->is_active == 1) {
+                $viewer->update(
+                    [
+                        'is_active' => 0
+                    ]
+                );
+                return response()->json(
+                    [
+                        'message' => "User đã khóa"
+                    ]
+                );
+            } else {
+                $viewer->update(
+                    [
+                        'is_active' => 1
+                    ]
+                );
+                return response()->json(
+                    [
+                        'message' => "User đã mở khóa"
+                    ]
+                );
+            }
+        } else {
+            return response()->json(['errors' => 'Không tìm thấy user trong dữ liệu']);
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        $viewer = User::where('id', $id)->first();
+
+        if ($viewer) {
+
+            $viewer->delete();
+
+            return response()->json(
+                [
+                    'message' => "Xóa user thành công"
+                ]
+            );
+            
+        } else {
+            return response()->json(['errors' => 'Không tìm thấy user trong dữ liệu']);
         }
     }
 
@@ -118,6 +180,7 @@ class ViewerController extends Controller
         $user = User::where('id', $id)->get();
         return view('HomePage.Profile', compact('user'));
     }
+
     public function updateAvatar(Request $req)
     {
         try {
