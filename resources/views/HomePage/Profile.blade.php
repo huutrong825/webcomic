@@ -34,7 +34,7 @@
                           </div>
                       </div>
                   </div>
-                  <a class="btn btn-primary btn-block" id="bt_SaveAvatar" style="display:none"><b>Save</b></a>
+                  <a class="btn btn-primary btn-block" id="bt_SaveAvatarView" style="display:none"><b>Save</b></a>
                 </div>
                 <!-- /.card-body -->
               </form>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <a class="btn btn-danger" id="btChangeInfo">Lưu</a>
+                            <a class="btn btn-danger" id="btChangeInfoView">Lưu</a>
                           </div>
                         </div>
                       </form>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <a  class="btn btn-danger" id="btChangePass">Lưu</a>
+                            <a  class="btn btn-danger" id="btChangePassView">Lưu</a>
                           </div>
                         </div>
                       </form>
@@ -130,46 +130,7 @@
 
 @endsection
 
-@section('script')
-<script>
-    const ipnElement = document.querySelector('#lastPass')
-    const ipnElement1 = document.querySelector('#password')
-    const ipnElement2 = document.querySelector('#password_confirmation')
-    const btToggle = document.querySelector('#togglePass')
-    // const btnElement = document.querySelector('#btnPassword')
-
-    // step 2
-    btToggle.addEventListener('click', function() {
-        // step 3
-        const currentType = ipnElement.getAttribute('type')
-        const currentType1 = ipnElement1.getAttribute('type')
-        const currentType2 = ipnElement2.getAttribute('type')
-        // step 4
-        ipnElement.setAttribute('type', currentType === 'password' ? 'text' : 'password')
-        ipnElement1.setAttribute('type', currentType1 === 'password' ? 'text' : 'password')
-        ipnElement2.setAttribute('type', currentType2 === 'password' ? 'text' : 'password')
-
-        this.classList.toggle('bi-eye')
-    })    
-</script>
-<script>
-    let img = document.getElementById('av');
-    let btSave = document.getElementById('bt_SaveAvatar');
-    let input = document.getElementById('input_av');
-    input.onchange = (e) => {
-    if (input.files[0])
-        img.src = URL.createObjectURL(input.files[0]);
-    btSave.style.display = 'block';
-    };
-</script>
-<script>
-$(document).on('click','#bt-av', function(e){
-    e.preventDefault();
-    $('#input_av').trigger('click');
-});
-</script>
-<script src="{{ asset('js/ajax/ajax_user.js') }}" ></script>
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/ajax/ajax_profile_viewer.js') }}" ></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-	    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
 @endsection

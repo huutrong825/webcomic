@@ -254,10 +254,9 @@ Route::group(
             return view('AdminPage/xep-hang');}
         );
 
-        Route::get('/thong-tin',
-        function () {
-            return view('AdminPage/thong-tin');}
-        );
+        Route::get('/thong-tin', ['uses'=>'InfoPageController@tongQuan']);
+        Route::get('/banner/{id}', ['uses'=>'InfoPageController@getTruyen']);
+        Route::post('/banner', ['uses'=>'InfoPageController@createBanner']);
 
     }
 );
@@ -279,7 +278,14 @@ Route::group(
 
         // Route::get('/kho-luu-tru', ['uses'=>'ViewerController@store']);
 
-        Route::get('/profile', ['uses'=>'ViewerController@profile']);
+        Route::group(
+            ['prefix'=>'profile'], function () {
+                Route::get('/', ['uses'=>'ViewerController@profile']);
+                Route::post('/avatar', ['uses'=>'ViewerController@updateAvatar']);
+                Route::post('/info', ['uses'=>'ViewerController@updateInfo']);
+                Route::post('/changePass', ['uses'=>'ViewerController@changePass']);
+            }
+        );
 
         Route::get('/loai-truyen/{req}', ['uses'=>'HomePageController@getType']);
         Route::get('/info-page', ['uses'=>'HomePageController@infoPage']);

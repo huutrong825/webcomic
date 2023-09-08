@@ -2,113 +2,16 @@
 $(document).ready(function(){
 
    
-    $("#form-regin").validate({
-        rules: {
-            "email": {
-                required: true,
-                email: true,
-            },
-            "password": {
-                required: true,
-                minlength: 6
-            }
-        },
-        messages: {
-            "email": {
-                required: "Bắt buộc nhập email",
-                email: "Nhập đúng cấu trúc email (vd: exemple@gmail.com)"
-            },
-            "password": {
-                required: "Bắt buộc nhập password",
-                minlength: "Hãy nhập ít nhất 6 ký tự"
-            }
-        },
-    });
-    
-    // Thêm user viewer
-    $(document).on('click','#sub_reg', function(e)
-    {
+    $(document).on('click','#bt-av', function(e){
         e.preventDefault();
-        $.ajax({
-            url : '/register',
-            type : 'post',
-            data : new FormData($('#form_regin')[0]),
-            contentType: false,
-            processData: false,
-            dataType : 'json',
-            headers : {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success:function(response)
-            {  
-                alertify.success(response.message);
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
-            },
-            error: function (xhr)
-            {
-                var errors = xhr.responseJSON.errors;
-
-                // Hiển thị thông báo lỗi
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field)) {
-                        var errorMessage = errors[field][0];
-                        // Xử lý hiển thị thông báo lỗi cho từng trường
-                        alertify.error(errorMessage);
-                    }
-                }
-            }
-        })
-    });
-
-    $(document).on('click','#sub_Login', function(e)
-    {
-        e.preventDefault();
-        $.ajax({
-            url : '/login',
-            type : 'post',
-            data : new FormData($('#form_login')[0]),
-            contentType: false,
-            processData: false,
-            dataType : 'json',
-            headers : {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success:function(response)
-            {  
-                
-                if (response.errors) {
-                    alertify.error(response.errors);
-                };
-                if (response.message) {
-                    alertify.success(response.message);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                }; 
-            },
-            error: function (xhr)
-            {
-                var errors = xhr.responseJSON.errors;
-
-                // Hiển thị thông báo lỗi
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field)) {
-                        var errorMessage = errors[field][0];
-                        // Xử lý hiển thị thông báo lỗi cho từng trường
-                        alertify.error(errorMessage);
-                    }
-                }
-            }
-        })
+        $('#input_av').trigger('click');
     });
 
      // Thay ảnh đại diện
-     $(document).on('click', '#bt_SaveAvatar', function(e){
+     $(document).on('click', '#bt_SaveAvatarView', function(e){
         e.preventDefault();
         $.ajax({
-            url:'/admin/profile',
+            url:'/profile/avatar',
             type:'post',
             data: new FormData($('#form_avt')[0]),
             contentType: false,
@@ -142,10 +45,10 @@ $(document).ready(function(){
     });
 
     // Thay đổi info user
-    $(document).on('click', '#btChangeInfo', function(e){
+    $(document).on('click', '#btChangeInfoView', function(e){
         e.preventDefault();
         $.ajax({
-            url:'/admin/profile/info',
+            url:'/profile/info',
             type:'post',
             data: new FormData($('#form-info')[0]),
             contentType: false,
@@ -178,10 +81,10 @@ $(document).ready(function(){
     });
     
     // Thay đổi mật khẩu
-    $(document).on('click', '#btChangePass', function(e){
+    $(document).on('click', '#btChangePassView', function(e){
         e.preventDefault();
         $.ajax({
-            url:'/admin/profile/changePass',
+            url:'/profile/changePass',
             type:'post',
             data: new FormData($('#form-password')[0]),
             contentType: false,
@@ -259,6 +162,34 @@ $(document).ready(function(){
         })
     });
 
+    const ipnElement3 = document.querySelector('#lastPass')
+    const ipnElement4 = document.querySelector('#password')
+    const ipnElement5 = document.querySelector('#password_confirmation')
+    const btToggle1 = document.querySelector('#togglePass')
+    // const btnElement = document.querySelector('#btnPassword')
 
+    // step 2
+    btToggle1.addEventListener('click', function() {
+        // step 3
+        const currentType3 = ipnElement3.getAttribute('type')
+        const currentType4 = ipnElement4.getAttribute('type')
+        const currentType5 = ipnElement5.getAttribute('type')
+        // step 4
+        ipnElement3.setAttribute('type', currentType3 === 'password' ? 'text' : 'password')
+        ipnElement4.setAttribute('type', currentType4 === 'password' ? 'text' : 'password')
+        ipnElement5.setAttribute('type', currentType5 === 'password' ? 'text' : 'password')
+
+        this.classList.toggle('bi-eye')
+    });
+
+    let img = document.getElementById('av');
+    let btSave = document.getElementById('bt_SaveAvatarView');
+    let input = document.getElementById('input_av');
+    input.onchange = (e) => {
+    if (input.files[0])
+        img.src = URL.createObjectURL(input.files[0]);
+    btSave.style.display = 'block';
+    };
 });
+
 
