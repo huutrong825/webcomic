@@ -41,7 +41,7 @@ class TheLoaiController extends Controller
                     return '<a value="' . $TL->id .'" class="btn btn-success btn-circle btn-sm bt-Update-TL">
                     <i class="fas fa-pen"></i></a>            
 
-                    <a value="' . $TL->id .'" class="btn btn-danger btn-circle btn-sm bt-Delete">
+                    <a value="' . $TL->id .'" class="btn btn-danger btn-circle btn-sm bt-Delete-TL">
                     <i class="fas fa-trash"></i></a>';
                 }
             )
@@ -51,7 +51,7 @@ class TheLoaiController extends Controller
 
     public function getID($id)
     {
-        $item = The_loai::where('id', $id)->get();
+        $item = The_loai::where('id', $id)->first();
         return response()->json(
             [
                 'state' => 200,
@@ -75,5 +75,24 @@ class TheLoaiController extends Controller
                 'mes' => 'Thành công'
             ]
         );
+    }
+
+    public function delete($id)
+    {
+        $theloai = The_loai::where('id', $id)->first();
+
+        if ($theloai) {
+
+            $theloai->delete();
+
+            return response()->json(
+                [
+                    'message' => "Xóa thể loại thành công"
+                ]
+            );
+            
+        } else {
+            return response()->json(['errors' => 'Không tìm thấy thể loại trong dữ liệu']);
+        }
     }
 }

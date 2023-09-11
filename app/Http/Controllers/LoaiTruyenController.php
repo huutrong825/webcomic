@@ -40,7 +40,7 @@ class LoaiTruyenController extends Controller
                     return '<a value="' . $LT->id .'" class="btn btn-success btn-circle btn-sm bt-Update-Loai">
                     <i class="fas fa-pen"></i></a>            
 
-                    <a value="' . $LT->id .'" class="btn btn-danger btn-circle btn-sm bt-Delete">
+                    <a value="' . $LT->id .'" class="btn btn-danger btn-circle btn-sm bt-Delete-Loai">
                     <i class="fas fa-trash"></i></a>';
                 }
             )
@@ -50,7 +50,7 @@ class LoaiTruyenController extends Controller
 
     public function getID($id)
     {
-        $item = Loai_truyen::where('id', $id)->get();
+        $item = Loai_truyen::where('id', $id)->first();
         return response()->json(
             [
                 'state' => 200,
@@ -74,5 +74,24 @@ class LoaiTruyenController extends Controller
                 'mes' => 'Thành công'
             ]
         );
+    }
+
+    public function delete($id)
+    {
+        $loai = Loai_truyen::where('id', $id)->first();
+
+        if ($loai) {
+
+            $loai->delete();
+
+            return response()->json(
+                [
+                    'message' => "Xóa loại truyện thành công"
+                ]
+            );
+            
+        } else {
+            return response()->json(['errors' => 'Không tìm thấy loại truyện trong dữ liệu']);
+        }
     }
 }

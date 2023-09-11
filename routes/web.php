@@ -216,6 +216,7 @@ Route::group(
                 Route::post('/them-loai', ['uses'=>'LoaiTruyenController@themLoai']);
                 Route::get('/getId/{id}', ['uses'=>'LoaiTruyenController@getID']);
                 Route::put('/update/{id}', ['uses'=>'LoaiTruyenController@update']);
+                Route::get('/delete/{id}', ['uses'=>'LoaiTruyenController@delete']);
             }
         );
 
@@ -231,6 +232,7 @@ Route::group(
                 Route::post('/them-the-loai', ['uses'=>'TheLoaiController@themTheLoai']);
                 Route::get('/getId/{id}', ['uses'=>'TheLoaiController@getID']);
                 Route::put('/update/{id}', ['uses'=>'TheLoaiController@update']);
+                Route::get('/delete/{id}', ['uses'=>'TheLoaiController@delete']);
             }
         );
 
@@ -255,8 +257,15 @@ Route::group(
         );
 
         Route::get('/thong-tin', ['uses'=>'InfoPageController@tongQuan']);
-        Route::get('/banner/{id}', ['uses'=>'InfoPageController@getTruyen']);
-        Route::post('/banner', ['uses'=>'InfoPageController@createBanner']);
+        Route::group(
+            ['prefix'=>'banner'], function () {
+                Route::get('/fetch', ['uses'=>'InfoPageController@banner']);
+                Route::get('/{id}', ['uses'=>'InfoPageController@getTruyen']);
+                Route::post('/', ['uses'=>'InfoPageController@createBanner']);
+            }
+        );        
+        Route::get('/info/fetch', ['uses'=>'InfoPageController@info']);
+        Route::get('/info/getInfo', ['uses'=>'InfoPageController@getInfo']);
 
     }
 );

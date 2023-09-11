@@ -267,23 +267,10 @@ class UsersController extends Controller
     {
         return view('AdminPage.user_admin');
     }
+
     public function listUser()
     {
         $user = User::all();
-
-        // if ($req->group != '') {
-        //     $user = $user->where('group_role', $req->group);
-        // }
-        // if ($req->active != '') {
-        //     $user = $user->where('is_active', $req->active);
-        // }
-
-        // if ($req->key != '') {
-        //     $user = $user->where('name', 'like', '%'. $req->key .'%')
-        //         ->orWhere('email', 'like', '%'. $req->key .'%');
-        // }
-        
-        // $user->get();
 
         return Datatables::of($user)->
         addColumn(

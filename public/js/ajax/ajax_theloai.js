@@ -14,8 +14,6 @@ $(document).on('click','#huy_them_theloai', function(e){
     $('#modal_them_theloai').modal('hide');
 });
 
-
-
 // Mở modal thêm loại mới
 $(document).on('click','#them_loai', function(e){
     e.preventDefault();
@@ -124,10 +122,8 @@ $(document).on('click','#huy_them_loai', function(e){
             type :'get',
             url : '/admin/the-loai/getId/' + id,
             success : function(response){
-                $.each(response.item, function(key, item){
-                    $('#idUp').val(item.id);
-                    $('#txtTL').val(item.the_loai);
-                });
+                $('#idUp').val(response.item.id);
+                $('#txtTL').val(response.item.the_loai);
             },
             error : function (err)
             {
@@ -180,11 +176,8 @@ $(document).on('click','#huy_them_loai', function(e){
             type :'get',
             url : '/admin/loai/getId/' + id,
             success : function(response){
-                console.log(response);
-                $.each(response.item, function(key, item){
-                    $('#idUp').val(item.id);
-                    $('#txtLT').val(item.loai_truyen);
-                });
+                $('#idUp').val(response.item.id);
+                $('#txtLT').val(response.item.loai_truyen);
             },
             error : function (err)
             {
@@ -223,6 +216,120 @@ $(document).on('click','#huy_them_loai', function(e){
             {
                 alert('Lỗi');
             },
+        });
+    });
+
+    // Mở modal xóa thể loại
+    $(document).on('click','.bt-Delete-TL', function(e){
+        e.preventDefault();
+        var id = $(this).attr('value');
+        $('#modal_Deleted_theloai').modal('show');
+        $.ajax({
+            type :'get',
+            url : '/admin/the-loai/getId/' + id,
+            success : function(response){
+                $('#idDeleteTL').val(response.item.id);
+                $('#nameDeleteTL').html(response.item.the_loai);
+            },
+            error : function (err)
+            {
+                alert('Lỗi');
+            }
+        });
+    });
+    
+    
+
+    //Xác nhận xóa
+    $(document).on('click','.bt_xacnhanxoa_TL', function(e)
+    {
+        e.preventDefault();
+        var id = $('#idDeleteTL').val();
+        $.ajax({
+            url:'/admin/the-loai/delete/' + id,
+            type: "GET",
+            success:function(response)
+            {       
+                if (response.errors) {
+                    alertify.error(response.errors);
+                };
+                if (response.message) {
+                    alertify.success(response.message);
+                    // $('#').modal('hide');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }; 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    });
+
+    // Mở modal xóa  loại
+    $(document).on('click','.bt-Delete-Loai', function(e){
+        e.preventDefault();
+        var id = $(this).attr('value');
+        $('#modal_Deleted_Loai').modal('show');
+        $.ajax({
+            type :'get',
+            url : '/admin/loai/getId/' + id,
+            success : function(response){
+                $('#idDeleteLoai').val(response.item.id);
+                $('#nameDeleteLoai').html(response.item.loai_truyen);
+            },
+            error : function (err)
+            {
+                alert('Lỗi');
+            }
+        });
+    });
+
+    //Xác nhận xóa loại
+    $(document).on('click','.bt_xacnhanxoa_Loai', function(e)
+    {
+        e.preventDefault();
+        var id = $('#idDeleteLoai').val();
+        $.ajax({
+            url:'/admin/loai/delete/' + id,
+            type: "GET",
+            success:function(response)
+            {       
+                if (response.errors) {
+                    alertify.error(response.errors);
+                };
+                if (response.message) {
+                    alertify.success(response.message);
+                    // $('#').modal('hide');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }; 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
         });
     });
 

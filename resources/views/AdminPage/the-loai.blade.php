@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <!-- Modal add thể loại -->
+    <!-- Modal add  loại -->
     <div class="modal hide fade in" data-backdrop="static" id="modal_them_loai"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
         <div class="modal-dialog " role="document">
             <div class="modal-content ">
@@ -163,7 +163,7 @@
         </div>
     </div>
 
-     <!-- Modal sửa thể loại -->
+     <!-- Modal sửa loại -->
      <div class="modal hide fade in" data-backdrop="static" id="modal_Update_Loai"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
         <div class="modal-dialog " role="document">
             <div class="modal-content ">
@@ -190,6 +190,45 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal Thể loại-->
+    <div class="modal hide fade in" id="modal_Deleted_theloai" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+                </div>
+                <div class="">
+                    <input type="hidden" class="form-control form-control-user" id='idDeleteTL' >
+                </div>
+                <div class="modal-body">Xác nhận xóa thể loại <span id='nameDeleteTL' style="color:blue"></span></div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary bt_xacnhanxoa_TL">Xác nhận</a>
+                    <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal Loại-->
+    <div class="modal hide fade in" id="modal_Deleted_Loai" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+                </div>
+                <div class="">
+                    <input type="hidden" class="form-control form-control-user" id='idDeleteLoai' >
+                </div>
+                <div class="modal-body">Xác nhận xóa thể loại <span id='nameDeleteLoai' style="color:blue"></span></div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary bt_xacnhanxoa_Loai">Xác nhận</a>
+                    <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
                 </div>
             </div>
         </div>
@@ -231,5 +270,5 @@
     }
 </script>
 
-<script src="/js/ajax/ajax_theloai.js"></script>
+<script src="{{ asset('/js/ajax/ajax_theloai.js') }}"></script>
 @endsection

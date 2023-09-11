@@ -1,5 +1,6 @@
 @extends('AdminPage/Index')
 @section('content')
+
     <div class="">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -12,7 +13,7 @@
                     <div class="form-group" >
                         <a class="btn btn-outline-success" id="add_banner"> Thêm mới </a>
                     </div>
-                    <table class="table table-bordered" id="myTable" width="100%">
+                    <table class="table table-bordered" id="myTableBanner" style="width:100%; text-align:center">
                         <thead>
                             <tr>
                                 <th >STT</th>
@@ -39,13 +40,17 @@
             </div>
             <div class="card-body" id="demo">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="loaiTable" width="100%">
+                    <div class="form-group" >
+                        <a class="btn btn-outline-success" id="update_info"> Chỉnh sửa </a>
+                    </div>
+                    <table class="table table-bordered" id="infoTable" style="width:100%; text-align:center">
                         <thead>
                             <tr>
                                 <th >STT</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Tên web</th>
-                                <th></th>
+                                <th>Tiêu đề</th>
                             </tr>   
                         </thead>
                         <tbody>
@@ -56,7 +61,7 @@
         </div>
     </div>
 
-    <!-- Modal add thể loại -->
+    <!-- Modal add banner -->
     <div class="modal hide fade in" data-backdrop="static" id="modal_them_banner"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
         <div class="modal-dialog " role="document">
             <div class="modal-content ">
@@ -98,27 +103,38 @@
         </div>
     </div>
 
-    <!-- Modal add thể loại -->
-    <div class="modal hide fade in" data-backdrop="static" id="modal_them_loai"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
+    <!-- Modal add info -->
+    <div class="modal hide fade in" data-backdrop="static" id="modal_update_info"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
         <div class="modal-dialog " role="document">
             <div class="modal-content ">
                 <div class="p-4">
                     <div class="text-center">
-                        <h4 class="text-black mb-4">Thêm loại truyện</h4>
+                        <h4 class="text-black mb-4">Chỉnh sửa thông tin page</h4>
                     </div>
                     <div class="modal-body ">
                         <div class="table-responsive col-sm">
                             <form class="user" id='formadd' >
-                                @csrf
                                 <fieldset>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id='txtLoai' name="txtLoai"
-                                            placeholder="Nhập loại truyện" required>
+                                        <lable>Email page:</lable>
+                                        <input type="text" class="form-control form-control-user" id='email' name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <lable>Phone page:</lable>
+                                        <input type="text" class="form-control form-control-user" id='phone' name="phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <lable>Tên web:</lable>
+                                        <input type="text" class="form-control form-control-user" id='ten_web' name="ten_web">
+                                    </div>
+                                    <div class="form-group">
+                                        <lable>Tiêu đề page:</lable>
+                                        <input type="text" class="form-control form-control-user" id='tieu_de' name="tieu_de">
                                     </div>
                                 </fieldset>
                                 <div class="form-group" style="text-align: right">
-                                    <a class="btn btn-success btn-user add_Loai">Thêm mới</a>
-                                    <a class="btn btn-danger btn-user btAddProd" id="huy_them_loai">Hủy</a>
+                                    <a class="btn btn-success btn-user add_Loai">Cập nhật</a>
+                                    <a class="btn btn-danger btn-user" id="cancelInfo">Hủy</a>
                                 </div>
                             </form>
                         </div>
@@ -249,6 +265,7 @@
 
                 var imgElement = document.createElement("img");
                 imgElement.src = $img;
+                imgElement.setAttribute('id', 'imgbanner');
                 imgElement.alt = response.items.ten_truyen;
                 imgElement.classList.add('s-10');
 
