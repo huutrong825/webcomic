@@ -26,7 +26,7 @@ $(document).ready(function(){
                 {'data' : 'action', 'orderable' : false, 'searchable' : false}
             ],
             'order' : [[0, 'desc']],
-            'searching':false,
+            'searching':false,'info':false,
         });
         // $('#formSearch').on('keyup change' ,function(e) {
         //     $('#myTable').DataTable().draw();

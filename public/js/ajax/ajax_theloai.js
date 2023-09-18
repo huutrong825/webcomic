@@ -46,6 +46,7 @@ $(document).on('click','#huy_them_loai', function(e){
             {  
                 alertify.success(response.mes);
                 $('form :input').val('');
+                $('#myTable').DataTable().ajax.reload();
             },
         });
     });
@@ -86,6 +87,7 @@ $(document).on('click','#huy_them_loai', function(e){
             success:function(response)
             {  
                 alertify.success(response.mes);
+                $('#loaiTable').DataTable().ajax.reload();
             },
             error: function ()
             {
@@ -237,7 +239,6 @@ $(document).on('click','#huy_them_loai', function(e){
             }
         });
     });
-    
     
 
     //Xác nhận xóa

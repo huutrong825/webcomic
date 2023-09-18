@@ -270,7 +270,7 @@ class UsersController extends Controller
 
     public function listUser()
     {
-        $user = User::all();
+        $user = User::whereNot('group_role', 3)->get();
 
         return Datatables::of($user)->
         addColumn(

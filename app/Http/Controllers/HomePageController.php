@@ -99,10 +99,18 @@ class HomePageController extends Controller
             WHERE id_truyen = (SELECT id_truyen FROM chap WHERE id = '. $id .')'
         );
 
+        $comment = DB::table('comment')->join('users', 'comment.id_viewer', '=', 'users.id')
+            ->where('id_chap', $id)->whereNull('comment.deleted_at')
+            ->select('comment.*', 'users.name', 'users.avatar')->orderBy('comment.id', 'desc')->get();
+
+        $count = DB::table('comment')->join('users', 'comment.id_viewer', '=', 'users.id')
+            ->where('id_chap', $id)->whereNull('comment.deleted_at')
+            ->count('comment.id');
+
         if ($loai->loai_truyen == 2) {
-            return view('HomePage/Read', compact('img', 'title', 'chap'));
+            return view('HomePage/Read', compact('img', 'title', 'chap', 'comment', 'count'));
         } else {
-            return view('HomePage/Read_chu', compact('img', 'title', 'chap'));
+            return view('HomePage/Read_chu', compact('img', 'title', 'chap', 'comment', 'count'));
         }
     }
 

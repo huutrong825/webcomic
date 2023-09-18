@@ -142,32 +142,15 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
+                    @foreach($banners as $b)
+                    @if ($b->loai_banner == 3)
                     <div class="bg-light p-4">
-                        <a href="#">
-                            <img class="s-10" src="{{ asset('img_truyen/kimetsu_no_yaiba.jpg') }}" alt="">
+                        <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                            <img class="s-10" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
                         </a>
                     </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/tat_da.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/thien_quan_tu_phuc.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/hay_khien_toi_ghet_cau.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/ma_dao_to_su.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/tham_thang.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/nguoi_la_ben_bo_bien.jpg') }}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="{{ asset('img_truyen/da_tung_la_anh.jpg') }}" alt="">
-                    </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -176,7 +159,6 @@
 
 @endsection
 @section('scripts')
-<!-- <script  src="{{ asset('js/ajax/ajax_viewer.js') }}"></script> -->
 
 <script>
     function handleClick(event) {

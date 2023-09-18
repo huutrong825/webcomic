@@ -9,7 +9,8 @@
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
                     <a class="breadcrumb-item text-dark" href="#">Truyện</a>
-                    <span class="breadcrumb-item active">{{ $t->ten_truyen }}</span>
+                    <a class="breadcrumb-item text-dark" href="{{ asset('/chi-tiet') }}/{{ $t->id_truyen }}">{{ $t->ten_truyen }}</a>
+                    <span class="breadcrumb-item active">{{ $t->ten_chap }}</span>
                 </nav>
             @endforeach                
             </div>
@@ -131,18 +132,26 @@
             <div class="col">
                 <div class="bg-light p-30">
                     <div class="">
-                        <h4 class="mb-4">Bình luận (1)</h4>
-                        <div class="form-floating d-flex">
-                            <textarea class="form-control" style="float:left" id="comment" name="text" placeholder="Comment goes here"></textarea>
-                            <button style="" for="comment"><i class="fa fa-paper-plane"></i></button>
-                        </div>
+                        <h4 class="mb-4">Bình luận ({{ $count }})</h4>
+                        <form id="form_comment" method="post" >
+                            @csrf
+                            <div class="comment media mb-4">
+                                @foreach ($title as $t)
+                                <input id="id_truyen" name="id_truyen" value="{{ $t->id_truyen }}" hidden>
+                                @endforeach
+                                <textarea name="comment" class="form-control" style=" min-width:500px; max-width:100%;min-height:50px;height:100%;width:100%;" ></textarea>
+                                <button id="bt_comment" class="btn btn-outline-success" style="margin-left: 10px; min-height:50px;"><i class="fa fa-paper-plane"></i></button>
+                            </div>
+                        </form>
+                        @foreach( $comment as $cm)
                         <div class="media mb-4">
-                            <img src="admin_img/avatar.png" alt="Image" class="img-fluid ">
+                            <img src="{{ asset('img/') }}/{{ $cm->avatar }}" alt="Image" class="img-fluid ">
                             <div class="media-body">
-                                <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                <h6>{{ $cm->name }}<small> - <i>{{ $cm->ngay_dang }}</i></small></h6>
+                                <p>{{ $cm->noi_dung }}</p>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

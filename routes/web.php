@@ -262,10 +262,19 @@ Route::group(
                 Route::get('/fetch', ['uses'=>'InfoPageController@banner']);
                 Route::get('/{id}', ['uses'=>'InfoPageController@getTruyen']);
                 Route::post('/', ['uses'=>'InfoPageController@createBanner']);
+                Route::get('/getBanner/{id}', ['uses'=>'InfoPageController@getBanner']);
+                Route::post('/update/{id}', ['uses'=>'InfoPageController@updateBanner']);
+                Route::get('/delete/{id}', ['uses'=>'InfoPageController@deleteBanner']);
             }
-        );        
-        Route::get('/info/fetch', ['uses'=>'InfoPageController@info']);
-        Route::get('/info/getInfo', ['uses'=>'InfoPageController@getInfo']);
+        ); 
+        Route::group(
+            ['prefix'=>'info'], function () {
+                Route::get('/fetch', ['uses'=>'InfoPageController@info']);
+                Route::get('/getInfo', ['uses'=>'InfoPageController@getInfo']);
+                Route::put('/updatetInfo', ['uses'=>'InfoPageController@updateInfo']);
+            }
+        );
+        
 
     }
 );

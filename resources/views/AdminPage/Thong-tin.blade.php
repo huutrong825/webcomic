@@ -113,7 +113,7 @@
                     </div>
                     <div class="modal-body ">
                         <div class="table-responsive col-sm">
-                            <form class="user" id='formadd' >
+                            <form class="user" id='formupdateInfo' >
                                 <fieldset>
                                     <div class="form-group">
                                         <lable>Email page:</lable>
@@ -133,7 +133,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="form-group" style="text-align: right">
-                                    <a class="btn btn-success btn-user add_Loai">Cập nhật</a>
+                                    <a class="btn btn-success btn-user " id="updateInfo"> Cập nhật</a>
                                     <a class="btn btn-danger btn-user" id="cancelInfo">Hủy</a>
                                 </div>
                             </form>
@@ -144,65 +144,64 @@
         </div>
     </div>
 
-    <!-- Modal sửa thể loại -->
-    <div class="modal hide fade in" data-backdrop="static" id="modal_Update_theloai"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
+    <!-- Modal update banner -->
+    <div class="modal hide fade in" data-backdrop="static" id="modal_update_banner"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
         <div class="modal-dialog " role="document">
             <div class="modal-content ">
                 <div class="p-4">
                     <div class="text-center">
-                        <h4 class="text-black mb-4"> Chỉnh sửa </h4>
+                        <h4 class="text-black mb-4">Chọn truyện làm banner</h4>
                     </div>
-                    <div class="modal-body ">
-                        <div class="table-responsive col-sm">
-                            <form class="user">
-                                @csrf
-                                <div class="">
-                                    <input type="hidden" class="form-control form-control-user" id='idUp' >
-                                </div>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id='txtTL' name="txtTL" required>
-                                    </div>
-                                </fieldset>
-                                <div class="form-group" style="text-align: right">
-                                    <a class="btn btn-success btn-user up_Theloai">Cập nhật</a>
-                                    <a class="btn btn-danger btn-user " id="huy_Update_theloai">Hủy</a>
-                                </div>
-                            </form>
+                    <div class="row px-xl-5">
+                        <div class="col">
+                            <div class="bg-light p-4">
+                                <div id="display-up-product" ></div>
+                            </div>
                         </div>
                     </div>
+                    <form id="form_update_banner" class="user">
+                        <div class="form-group">
+                            <select class="form-control filter" id="product_up_select" name="product_up_select" onchange="updateProduct()">
+                                <option  id="seleced_banner" name="seleced_banner"></option>
+                                @foreach ($truyen as $t)
+                                <option value="{{ $t->id }}">{{ $t->ten_truyen }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control filter" id="type_up_banner" name="type_up_banner" >
+                                <option  id="seleced_type" name="seleced_type"></option>
+                                <option value="1">Banner carousel</option>
+                                <option value="2">Banner offer</option>
+                                <option value="3">Banner item</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input id='idbanner' name='idbanner' type='text' hidden>
+                        </div>
+                        <div class="form-group" style="text-align: right">
+                            <a class="btn btn-success btn-user Up_Banner">Cập nhật</a>
+                            <a class="btn btn-danger btn-user " id="cancelUpBanner">Hủy</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-     <!-- Modal sửa thể loại -->
-     <div class="modal hide fade in" data-backdrop="static" id="modal_Update_Loai"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   
-        <div class="modal-dialog " role="document">
-            <div class="modal-content ">
-                <div class="p-4">
-                    <div class="text-center">
-                        <h4 class="text-black mb-4"> Chỉnh sửa </h4>
-                    </div>
-                    <div class="modal-body ">
-                        <div class="table-responsive col-sm">
-                            <form class="user">
-                                @csrf
-                                <div class="">
-                                    <input type="hidden" class="form-control form-control-user" id='idUp' >
-                                </div>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id='txtLT' name="txtLT" required>
-                                    </div>
-                                </fieldset>
-                                <div class="form-group" style="text-align: right">
-                                    <a class="btn btn-success btn-user up_Loai">Cập nhật</a>
-                                    <a class="btn btn-danger btn-user " id="huy_Update_Loai">Hủy</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="modal hide fade in" id="modal_Deleted_Banner" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+                </div>
+                <div class="">
+                    <input type="hidden" class="form-control form-control-user" id='idDeleteBanner' >
+                </div>
+                <div class="modal-body">Xác nhận xóa banner <span id='nameDeleteBanner' style="color:blue"></span></div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary bt_xacnhanxoa_Banner">Xác nhận</a>
+                    <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
                 </div>
             </div>
         </div>
@@ -252,6 +251,49 @@
             displayProduct.innerHTML = "";
 
             var id = $('#product_select').val();
+            $.ajax({
+                url:'/admin/banner/' + id,
+                type:'get',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function(response)
+                {
+                    $img = "/img_truyen/" + response.items.bia_truyen ;
+
+                var imgElement = document.createElement("img");
+                imgElement.src = $img;
+                imgElement.setAttribute('id', 'imgbanner');
+                imgElement.alt = response.items.ten_truyen;
+                imgElement.classList.add('s-10');
+
+                displayProduct.appendChild(imgElement);
+                },
+                error: function (xhr)
+                    {
+                        var errors = xhr.responseJSON.errors;
+
+                        // Hiển thị thông báo lỗi
+                        for (var field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                var errorMessage = errors[field][0];
+                                // Xử lý hiển thị thông báo lỗi cho từng trường
+                                alertify.error(errorMessage);
+                            }
+                        }
+                    }
+            });
+        }
+    </script>
+    <script>
+        function updateProduct() {    
+            var displayProduct = document.getElementById("display-up-product");
+
+            // Xóa nội dung hiện tại trong div display-product
+            displayProduct.innerHTML = "";
+
+            var id = $('#product_up_select').val();
             $.ajax({
                 url:'/admin/banner/' + id,
                 type:'get',

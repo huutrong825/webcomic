@@ -215,7 +215,8 @@ $(document).ready(function(){
             }
         });
     });
- 
+    
+    //Tạo bình luận
     $(document).on('click','#bt_comment', function(e)
     {
         e.preventDefault();

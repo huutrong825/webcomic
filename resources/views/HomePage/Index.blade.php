@@ -11,46 +11,56 @@
                         <li data-target="#header-carousel" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
+                        @foreach($banners as $b)
+                        @if ($b->loai_banner == 1)
                         <div class="carousel-item position-relative active" style="height: 430px;">
-                            <img class="position-absolute w-10 h-100" src="img_truyen/black_clover.jpg" style="object-fit: cover;">
-                            <!-- <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                                <img class="position-absolute w-10 h-100" style="object-fit: cover;" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                  
-                                </div>
-                            </div> -->
-                        </div>
-                        <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-10 h-100" src="img_truyen/tan_lang_danh_mat.jpg">
-                            <!-- <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">{{ $b->ten_truyen }}</h1>
+                                    <!-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> -->
                                     
                                 </div>
-                            </div> -->
+                            </div>
+                            </a>
+                        </div>
+                        @endif
+                        @endforeach
+                        
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-10 h-100" src="img_truyen/tan_lang_danh_mat.jpg">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Tân lang đánh mất</h1>
+                                    <!-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> -->
+                                    
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
                             <img class="position-absolute w-10 h-100" src="img_truyen/one_punch_man.jpg" >
-                            <!-- <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">One Punch Man</h1>
+                                    <!-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> -->
                                     
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
+                @foreach($banners as $b)
+                @if ($b->loai_banner == 2)
                 <div class="product-offer mb-30" style="height: 200px;">
-                    <img class="img-fluid" src="img_truyen/da_ky.jpg" alt="">
+                    <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                        <img class="img-fluid" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
+                    </a>
                 </div>
-                <div class="product-offer mb-30" style="height: 200px;">
-                    <img class="img-fluid" src="img_truyen/hinh_thuc_cam_thong.jpg" alt="">
-                </div>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -156,7 +166,7 @@
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" id="{{ $a->id  }}" onclick="handleClick(event)"><i id="{{ $a->id  }}" class="fa fa-bookmark" title="Lưu"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart" title="Thích"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $a->id }}"><i class="fa fa-eye" title=""></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $a->id }}"><i class="fa fa-eye" title="Đọc"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4 text-truncate">
@@ -178,32 +188,15 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
+                    @foreach($banners as $b)
+                    @if ($b->loai_banner == 3)
                     <div class="bg-light p-4">
-                        <a href="#">
-                            <img class="s-10" src="img_truyen/kimetsu_no_yaiba.jpg" alt="">
+                        <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                            <img class="s-10" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
                         </a>
                     </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/tat_da.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/thien_quan_tu_phuc.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/hay_khien_toi_ghet_cau.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/ma_dao_to_su.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/tham_thang.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/nguoi_la_ben_bo_bien.jpg" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img class="s-10" src="img_truyen/da_tung_la_anh.jpg" alt="">
-                    </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -146,7 +146,6 @@
                         <a class="collapse-item" href="/admin/thong-tin">Tổng quan</a>
                         <a class="collapse-item" href="/admin/register">Thêm user</a>
                         <a class="collapse-item" href="/admin/user-admin">List admin</a>
-                        <a class="collapse-item" href="">Liên hệ</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>
@@ -162,12 +161,10 @@
         </ul>
         <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
+        <!-- Login Logout -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -231,7 +228,7 @@
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Login Logout -->
 
     </div>
     <!-- End of Page Wrapper -->

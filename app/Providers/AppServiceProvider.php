@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\The_loai;
 use App\Models\Loai_truyen;
+use App\Models\Banner;
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
         $theloai = The_loai::all();
         View::share('theloai', $theloai);
+
+        $banners = Banner::all();
+        View::share('banners', $banners);
 
         Paginator::useBootstrap();
     }

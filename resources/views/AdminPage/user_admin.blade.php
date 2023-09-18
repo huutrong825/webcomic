@@ -1,7 +1,7 @@
 @extends('AdminPage/Index')
 @section('content')
 
-<div class="card shadow mb-4">
+<!-- <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 style="float:left"  class="m-0 font-weight-bold text-primary">Thao tác</h6>
         <a style="float:right" class="text-success" data-toggle="collapse" data-target="#demo"><i class="fas fa-plus"></i></a>
@@ -38,7 +38,7 @@
         </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="alert alert-success" style="display:none">
 </div>
