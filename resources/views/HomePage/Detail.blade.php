@@ -8,7 +8,7 @@
                 @foreach ($truyen as $t)
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
-                        <a class="breadcrumb-item text-dark" href="#">Truyện tranh</a>
+                        <a class="breadcrumb-item text-dark" href="#">{{ $t->loai_truyen == 2 ? 'Truyện tranh' : 'Truyện chữ' }}</a>
                         <span class="breadcrumb-item active">{{ $t->ten_truyen }}</span>
                     </nav>
                 @endforeach
@@ -58,14 +58,29 @@
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class=" mr-3">
-                            <button class="btn btn-outline-success px-3"><i class="fa fa-book mr-1"></i>Đọc từ đầu</button>
+                            <a class="btn btn-outline-success px-3 {{ $min_chap == null ? 'isDisabled': '' }}" href="{{ asset('/truyen') }}/{{ $min_chap }}"><i class="fa fa-book mr-1"></i>Đọc từ đầu</a>
                         </div>
                         <div class=" mr-3">
+                            @php
+                                $found = false;
+                            @endphp
+                            @foreach($checkstores as $tk)                                
+                                    @if ($t->id == $tk->id_truyen && $tk->id_viewer == Auth::id())
+                                        @php
+                                            $found = true;
+                                            break;
+                                        @endphp
+                                    @endif
+                                    
+                            @endforeach
+                            @if ($found)
+                            <button class="btn btn-outline-danger px-3" id="{{ $t->id  }}" onclick="handleClick(event)"><i  id="{{ $t->id  }}" class="fa fa-check mr-1"></i> Đã theo dõi </button>
+                            @else
                             <button class="btn btn-outline-danger px-3" id="{{ $t->id  }}" onclick="handleClick(event)"><i  id="{{ $t->id  }}" class="fa fa-bookmark mr-1"></i> Theo dõi </button>
-                            <!-- <button class="btn btn-outline-danger px-3" style="display:none"><i class="fa fa-times mr-1"></i> Hủy theo dõi </button> -->
+                            @endif
                         </div>
                         <div class=" mr-3">
-                            <button class="btn btn-outline-info px-3"><i class="fa fa-heart mr-1"></i>Thích</button>
+                            <a class="btn btn-outline-info px-3" id="{{ $t->id }}" onclick="likeClick(event)"><i class="fa fa-heart mr-1"></i>Thích</a>
                             <button class="btn btn-outline-info px-3" style="display:none"><i class="fa fa-heart mr-1"></i>Đã Thích</button>
                         </div>
                     </div>
@@ -96,7 +111,7 @@
                         <ul class="list-group">
                             @foreach( $chap as $c)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="{{ asset('/truyen') }}/{{ $c->id }}">{{ $c->ten_chap }}</a>
+                                    <a href="{{ asset('/truyen/chap') }}/{{ $c->id }}">{{ $c->ten_chap }}</a>
                                     <span class="badge "><?php echo date( "m/d/Y", strtotime($c->ngay_dang)); ?> </span>
                                 </li>
                             @endforeach
@@ -199,6 +214,15 @@
         });
     }
 </script>
+
+<style>
+    .isDisabled {
+        color: currentColor;
+        pointer-events: none;
+        opacity: 0.5;
+        text-decoration: none;
+    }
+</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
 

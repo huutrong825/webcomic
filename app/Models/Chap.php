@@ -26,6 +26,6 @@ class Chap extends Model
 
     public function errol()
     {
-        return $this->hasMany(Chap_Errol::class, 'id_chap', 'id');
+        return $this->hasMany(Chap_Error::class, 'id_chap', 'id');
     }
 }

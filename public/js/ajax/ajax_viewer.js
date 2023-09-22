@@ -260,6 +260,61 @@ $(document).ready(function(){
         })
     });
 
+    //Mở modal lỗi
+    $(document).on('click','.btErrorChap', function(e){
+        e.preventDefault();
+        $('#modal_error_chap').modal('show');
+    });
+    
+    // Hủy  đóng modal
+    $(document).on('click','.cancelError', function(e){
+        e.preventDefault();
+        $('form :input').val('');
+        $('#modal_error_chap').modal('hide');
+    });
+   
+    //Báo lỗi chap
+    $(document).on('click','.send_Error', function(e)
+    {
+        e.preventDefault();
+        $.ajax({
+            url : '/send-error',
+            type : 'post',
+            data : new FormData($('#formError')[0]),
+            contentType: false,
+            processData: false,
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                
+                if (response.errors) {
+                    alertify.error(response.errors);
+                };
+                if (response.message) {
+                    alertify.success(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 10);
+                }; 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        })
+    });
 
 });
 

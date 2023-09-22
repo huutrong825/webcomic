@@ -3053,10 +3053,10 @@
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 1000;
+    z-index: 100;
     display: none;
     float: left;
-    min-width: 10rem;
+    min-width: 5rem;
     padding: 0.5rem 0;
     margin: 0.125rem 0 0;
     font-size: 1rem;
@@ -3066,6 +3066,7 @@
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius:0 0 0.5rem  0.5rem;
   }
   
   .dropdown-menu-left {
@@ -10036,4 +10037,11 @@
 .area-image > li {
   background-size: cover; 
   background-position: center; 
+}
+
+.isDisabled {
+  color: currentColor;
+  pointer-events: none;
+  opacity: 0.5;
+  text-decoration: none;
 }

@@ -55,7 +55,7 @@
                 @foreach($banners as $b)
                 @if ($b->loai_banner == 2)
                 <div class="product-offer mb-30" style="height: 200px;">
-                    <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                    <a id="{{ $b->id_truyen }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
                         <img class="img-fluid" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
                     </a>
                 </div>
@@ -79,13 +79,29 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('img_truyen/') }}/{{ $u->bia_truyen }}" alt="{{ $u->ten_truyen }}">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-bookmark" title="Lưu"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart" title="Thích"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $u->id }}"><i class="fa fa-eye" title=""></i></a>
+                            @php
+                                $found = false;
+                            @endphp
+                            @foreach($checkstores as $tk)                                
+                                    @if ($u->id == $tk->id_truyen && $tk->id_viewer == Auth::id())
+                                        @php
+                                            $found = true;
+                                            break;
+                                        @endphp
+                                    @endif
+                                    
+                            @endforeach
+                            @if ($found)
+                                <a class="btn btn-outline-dark btn-square" id="{{ $u->id  }}" onclick="handleClick(event)"><i id="{{ $u->id  }}" class="fa fa-check" title="Hủy lưu"></i></a>
+                            @else
+                                <a class="btn btn-outline-dark btn-square" id="{{ $u->id  }}" onclick="handleClick(event)"><i id="{{ $u->id  }}" class="fa fa-bookmark" title="Lưu"></i></a>
+                            @endif
+                            <a class="btn btn-outline-dark btn-square" id="{{ $u->id }}" onclick="likeClick(event)"><i class="far fa-heart" title="Thích"></i></a>
+                            <a class="btn btn-outline-dark btn-square" id="{{ $u->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $u->id }}"><i id="{{ $u->id }}" class="fa fa-eye" title=""></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4 text-truncate">
-                        <a class="h6 text-decoration-none text-truncate" href="{{ asset('/chi-tiet') }}/{{ $u->id }}">{{ $u->ten_truyen }}</a>
+                        <a class="h6 text-decoration-none text-truncate" id="{{ $u->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $u->id }}">{{ $u->ten_truyen }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h8>{{ $u->ten_chap }}</h8>
                         </div>
@@ -108,13 +124,29 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('img_truyen/') }}/{{ $n->bia_truyen }}" alt="{{ $n->ten_truyen }}">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-bookmark" title="Lưu"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart" title="Thích"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $n->id }}"><i class="fa fa-eye" title=""></i></a>
+                            @php
+                                $found = false;
+                            @endphp
+                            @foreach($checkstores as $tk)                                
+                                    @if ($n->id  == $tk->id_truyen && $tk->id_viewer == Auth::id())
+                                        @php
+                                            $found = true;
+                                            break;
+                                        @endphp
+                                    @endif
+                                    
+                            @endforeach
+                            @if ($found)
+                                <a class="btn btn-outline-dark btn-square" id="{{ $n->id   }}" onclick="handleClick(event)"><i id="{{ $n->id }}" class="fa fa-check" title="Hủy lưu"></i></a>
+                            @else
+                                <a class="btn btn-outline-dark btn-square" id="{{ $n->id   }}" onclick="handleClick(event)"><i id="{{ $n->id }}" class="fa fa-bookmark" title="Lưu"></i></a>
+                            @endif
+                            <a class="btn btn-outline-dark btn-square" id="{{ $n->id }}" onclick="likeClick(event)"><i class="far fa-heart" title="Thích"></i></a>
+                            <a class="btn btn-outline-dark btn-square" id="{{ $n->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $n->id }}"><i id="{{ $n->id }}" class="fa fa-eye" title=""></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4 text-truncate">
-                        <a class="h6 text-decoration-none text-truncate" href="{{ asset('/chi-tiet') }}/{{ $n->id }}">{{ $n->ten_truyen }}</a>
+                        <a class="h6 text-decoration-none text-truncate" id="{{ $n->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $n->id }}">{{ $n->ten_truyen }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h8>{{ $n->ten_chap }}</h8>
                         </div>
@@ -125,33 +157,6 @@
         </div>
     </div>
     <!-- Products End -->
-
-    <!-- Offer Start -->
-    <!-- <div class="container-fluid pt-5 pb-3">
-        <div class="row px-xl-5">
-            <div class="col-md-6">
-                <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/offer-1.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="img/offer-2.jpg" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Offer End -->
 
 
     <!-- Products Start -->
@@ -164,13 +169,29 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('img_truyen/') }}/{{ $a->bia_truyen }}" alt="{{ $a->ten_truyen }}">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" id="{{ $a->id  }}" onclick="handleClick(event)"><i id="{{ $a->id  }}" class="fa fa-bookmark" title="Lưu"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart" title="Thích"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href="{{ asset('/chi-tiet') }}/{{ $a->id }}"><i class="fa fa-eye" title="Đọc"></i></a>
+                            @php
+                                $found = false;
+                            @endphp
+                            @foreach($checkstores as $tk)                                
+                                    @if ($a->id == $tk->id_truyen && $tk->id_viewer == Auth::id())
+                                        @php
+                                            $found = true;
+                                            break;
+                                        @endphp
+                                    @endif
+                                    
+                            @endforeach
+                            @if ($found)
+                                <a class="btn btn-outline-dark btn-square" id="{{ $a->id }}" onclick="handleClick(event)"><i id="{{ $a->id }}" class="fa fa-check" title="Hủy lưu"></i></a>
+                            @else
+                                <a class="btn btn-outline-dark btn-square" id="{{ $a->id }}" onclick="handleClick(event)"><i id="{{ $a->id }}" class="fa fa-bookmark" title="Lưu"></i></a>
+                            @endif
+                            <a class="btn btn-outline-dark btn-square" id="{{ $a->id }}" onclick="likeClick(event)"><i id="{{ $a->id }}" class="far fa-heart" title="Thích"></i></a>
+                            <a class="btn btn-outline-dark btn-square" id="{{ $a->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $a->id }}"><i id="{{ $a->id }}" class="fa fa-eye" title="Đọc"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4 text-truncate">
-                        <a class="h6 text-decoration-none text-truncate" href="{{ asset('/chi-tiet') }}/{{ $a->id }}">{{ $a->ten_truyen }}</a>
+                        <a class="h6 text-decoration-none text-truncate" id="{{ $a->id }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $a->id }}">{{ $a->ten_truyen }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h8>{{ $a->ten_chap }}</h8>
                         </div>
@@ -191,8 +212,8 @@
                     @foreach($banners as $b)
                     @if ($b->loai_banner == 3)
                     <div class="bg-light p-4">
-                        <a href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
-                            <img class="s-10" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
+                        <a id="{{ $b->id_truyen }}" onclick="readClick(event)" href="{{ asset('/chi-tiet') }}/{{ $b->id_truyen }}" >
+                            <img id="{{ $b->id_truyen }}" class="s-10" src="{{ asset('img_truyen/') }}/{{ $b->image }}" alt="{{ $b->ten_truyen }}" title="{{ $b->ten_truyen }}" >
                         </a>
                     </div>
                     @endif
@@ -206,45 +227,4 @@
 @endsection
 
 @section('scripts')
-
-<script>
-    function handleClick(event) {
-      var id = event.target.id;
-        $.ajax({
-            url:'/add-store/' + id,
-            type:'get',
-            // dataType: 'json',
-            // headers: {
-            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            // },
-            success: function(response)
-            {
-                if (response.errors) {
-                    alertify.error(response.errors);
-                };
-                if (response.message) {
-                    
-                    alertify.success(response.message);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                }; 
-            },
-            error: function (xhr)
-            {
-                var errors = xhr.responseJSON.errors;
-
-                // Hiển thị thông báo lỗi
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field)) {
-                        var errorMessage = errors[field][0];
-                        // Xử lý hiển thị thông báo lỗi cho từng trường
-                        alertify.error(errorMessage);
-                    }
-                }
-            }
-        });
-    }
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 @endsection

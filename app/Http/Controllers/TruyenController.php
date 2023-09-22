@@ -49,30 +49,30 @@ class TruyenController extends Controller
 
     public function truyenTranh() 
     {
-        $truyen = DB::select(
-            'select t.*, m.ten_chap
-            FROM truyen t
-            LEFT JOIN (SELECT * FROM  chap c JOIN (
-                SELECT h.id_truyen as i, MAX(h.ngay_dang) as d
-                FROM chap h
-                GROUP BY h.id_truyen
-                ) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang=latest_chap.d) as m ON t.id = m.id_truyen WHERE t.loai_truyen = 2' 
-        );
+        $truyen = DB::table('truyen as t')
+            ->leftJoin(DB::raw('(SELECT * FROM chap c JOIN (SELECT h.id_truyen as i, MAX(h.ngay_dang) as d FROM chap h GROUP BY h.id_truyen) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang = latest_chap.d) as m'), 't.id', '=', 'm.id_truyen')
+            ->select('t.*', 'm.ten_chap')
+            ->where('t.loai_truyen', 2)->paginate(12);
+        // $truyen = DB::select(
+        //     'select t.*, m.ten_chap
+        //     FROM truyen t
+        //     LEFT JOIN (SELECT * FROM  chap c JOIN (
+        //         SELECT h.id_truyen as i, MAX(h.ngay_dang) as d
+        //         FROM chap h
+        //         GROUP BY h.id_truyen
+        //         ) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang=latest_chap.d) as m ON t.id = m.id_truyen WHERE t.loai_truyen = 2' 
+        // );
 
         return view('AdminPage.truyen-tranh', compact('truyen'));
     }
 
     public function truyenChu() 
     {
-        $truyen = DB::select(
-            'select t.*, m.ten_chap
-            FROM truyen t
-            LEFT JOIN (SELECT * FROM  chap c JOIN (
-                SELECT h.id_truyen as i, MAX(h.ngay_dang) as d
-                FROM chap h
-                GROUP BY h.id_truyen
-                ) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang=latest_chap.d) as m ON t.id = m.id_truyen WHERE t.loai_truyen = 1' 
-        );
+        $truyen = DB::table('truyen as t')
+            ->leftJoin(DB::raw('(SELECT * FROM chap c JOIN (SELECT h.id_truyen as i, MAX(h.ngay_dang) as d FROM chap h GROUP BY h.id_truyen) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang = latest_chap.d) as m'), 't.id', '=', 'm.id_truyen')
+            ->select('t.*', 'm.ten_chap')
+            ->where('t.loai_truyen', '<>', 2)->paginate(12);
+
         return view('AdminPage.truyen-chu', compact('truyen'));
     }
 

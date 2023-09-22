@@ -73,7 +73,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                @if (Auth::User()->group_role == 1)
+                                @if (Auth::User()->group_role != 3)
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ asset('/admin') }}">
                                     <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -192,27 +192,13 @@
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block me" onclick="myFunction()">
-                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100"  style="height: 65px; padding: 0 30px;">
+                <a class="d-flex align-items-center justify-content-between bg-primary w-100"  style="height: 65px; padding: 0 30px;">
                     <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Thể loại</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <!-- <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999; ">
-                    <div class="navbar-nav w-100 theloai">
-                        @foreach($theloai as $t)
-                        <a href="{{ $t->id }}" class="nav-item nav-link">{{ $t->the_loai }}</a>
-                        @endforeach
-                    </div>
-                </nav> -->
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                    <!-- <a href="" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                    </a> -->
-                    <!-- <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button> -->
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="http://127.0.0.1:8000/" class="nav-item nav-link active">Trang chủ</a>
@@ -220,13 +206,13 @@
                             <a href="{{ asset('/loai-truyen/1') }}" class="nav-item nav-link">Truyện chữ</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Xếp hạng <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="#" class="dropdown-item">Top Ngày</a>
+                                <div class="dropdown-menu bg-primary m-0">
+                                    <!-- <a href="#" class="dropdown-item">Top Ngày</a>
                                     <a href="#" class="dropdown-item">Top Tuần</a>
-                                    <a href="#" class="dropdown-item">Top Tháng</a>
-                                    <a href="#" class="dropdown-item">Yêu Thích</a>
-                                    <a href="#" class="dropdown-item">Theo dõi</a>
-                                    <a href="#" class="dropdown-item">Lượt xem</a>
+                                    <a href="#" class="dropdown-item">Top Tháng</a> -->
+                                    <a href="/lay-top/1" class="dropdown-item">Yêu Thích</a>
+                                    <a href="/lay-top/2" class="dropdown-item">Theo dõi</a>
+                                    <a href="/lay-top/3" class="dropdown-item">Lượt xem</a>
                                 </div>
                             </div>
                             <a href="{{ asset('/info-page')  }}" class="nav-item nav-link">Thông tin</a>
@@ -352,6 +338,7 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/ajax/ajax_layout.js') }}"></script>
     <script src="{{ asset('js/ajax/ajax_viewer.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <script type="text/javascript">
         function myFunction() {
             var x = document.getElementById('menu_TL');
@@ -360,6 +347,92 @@
             } else {
                 x.style.display = 'none';
             }
+        }
+    </script>
+    <!-- Like truyện -->
+    <script>
+        function likeClick(event) {
+        var id = event.target.id;
+            $.ajax({
+                url:'/like/' + id,
+                type:'get',
+                success: function(response)
+                {
+                    if (response.errors) {
+                        alertify.error(response.errors);
+                    };
+                    if (response.message) {
+                        
+                        alertify.success(response.message);
+                        setTimeout(function() {
+                            location.reload();
+                        },1);
+                    }; 
+                },
+                error: function (xhr)
+                {
+                    var errors = xhr.responseJSON.errors;
+
+                    // Hiển thị thông báo lỗi
+                    for (var field in errors) {
+                        if (errors.hasOwnProperty(field)) {
+                            var errorMessage = errors[field][0];
+                            // Xử lý hiển thị thông báo lỗi cho từng trường
+                            alertify.error(errorMessage);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    <!-- Count view -->
+    <script>
+        function readClick(event) {
+            var id = event.target.id;
+            $.ajax({
+                url:'/view/' + id,
+                type:'get',
+                success: function(response)
+                {
+                
+                },
+            });
+        }
+    </script>
+    <!-- Add in Store -->
+    <script>
+        function handleClick(event) {
+        var id = event.target.id;
+            $.ajax({
+                url:'/add-store/' + id,
+                type:'get',
+                success: function(response)
+                {
+                    if (response.errors) {
+                        alertify.error(response.errors);
+                    };
+                    if (response.message) {
+                        
+                        alertify.success(response.message);
+                        setTimeout(function() {
+                            location.reload();
+                        },1);
+                    }; 
+                },
+                error: function (xhr)
+                {
+                    var errors = xhr.responseJSON.errors;
+
+                    // Hiển thị thông báo lỗi
+                    for (var field in errors) {
+                        if (errors.hasOwnProperty(field)) {
+                            var errorMessage = errors[field][0];
+                            // Xử lý hiển thị thông báo lỗi cho từng trường
+                            alertify.error(errorMessage);
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>

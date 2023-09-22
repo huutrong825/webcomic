@@ -285,7 +285,7 @@ Route::group(
         Route::get('/', ['uses'=>'HomePageController@all']);
 
         Route::get('/chi-tiet/{id}', ['uses'=>'HomePageController@detail']);
-        Route::get('/truyen/{id}', ['uses'=>'HomePageController@reviewChap']);
+        Route::get('/truyen/chap/{id}', ['uses'=>'HomePageController@reviewChap']);
 
         Route::get('/search/{id}', ['uses'=>'HomePageController@layTheoTL']);
         Route::get('/search', ['uses'=>'HomePageController@search']);
@@ -294,7 +294,7 @@ Route::group(
         Route::post('/register', ['uses'=>'ViewerController@postRegister']);
         Route::get('/logout', ['uses'=>'ViewerController@getLogout']);
 
-        // Route::get('/kho-luu-tru', ['uses'=>'ViewerController@store']);
+        Route::get('/lay-top/{req}', ['uses'=>'HomePageController@getTop']);
 
         Route::group(
             ['prefix'=>'profile'], function () {
@@ -310,7 +310,10 @@ Route::group(
 
         Route::get('/add-store/{id}', ['uses'=>'StoreController@addStore']);
         Route::get('/kho-luu-tru', ['uses'=>'StoreController@getStore']);
+        Route::get('/like/{id}', ['uses'=>'StoreController@like']);
+        Route::get('/view/{id}', ['uses'=>'StoreController@countRead']);
 
         Route::post('/post-comment', ['uses'=>'CommentController@postComment']);
+        Route::post('/send-error', ['uses'=>'ChapErrorController@errorChap']);
     }
 );

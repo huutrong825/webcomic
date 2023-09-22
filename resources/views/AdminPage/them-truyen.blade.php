@@ -1,7 +1,6 @@
 @extends('AdminPage/Index')
 @section('content')
 
-
     <div class="container-fluid pb-5 ">  
         <div class="">
             <form id="formThemTruyen" class="row px-xl-5" enctype="multipart/form-data">

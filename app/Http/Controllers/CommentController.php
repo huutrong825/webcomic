@@ -41,12 +41,19 @@ class CommentController extends Controller
             if ($v->fails()) {
                 return response()->json(['errors' => $v->errors()], 422);
             } else {
+
+                $idchap = null;
+
+                if ($r->id_chap) {
+                    $idchap = $r->id_chap;
+                }
+                
                 Comment::create(
                     [
                         'id_truyen' => $r->id_truyen,
                         'id_viewer' => Auth::id(),
                         'noi_dung' => $r->comment,
-                        'id_chap' => 0,
+                        'id_chap' => $idchap,
                         'ngay_dang' => date('Y-m-d H:i:s'),
                     ]
                 );
