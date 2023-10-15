@@ -27,7 +27,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Fill sort -->
-    <div class="container-fluid" >
+    <!-- <div class="container-fluid" >
         <div class=" px-xl-5">
             <div class=" h-auto mb-30">
                 <div class=" bg-light p-30  text-align-center">
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End -->
 
     <!-- List find -->

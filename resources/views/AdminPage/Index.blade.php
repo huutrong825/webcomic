@@ -112,13 +112,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/admin/viewer">Danh sách viewer</a>
                         <a class="collapse-item" href="/admin/comment">Bình luận truyện</a>
+                        <a class="collapse-item" href="/admin/error">Báo cáo lỗi truyện</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#orderPages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-boxes"></i>
@@ -132,7 +133,7 @@
                         <div class="collapse-divider"></div>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">

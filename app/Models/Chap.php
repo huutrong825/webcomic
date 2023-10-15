@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chap extends Model
 {
+    use HasFactory, SoftDeletes;
+    
     protected $table = 'chap';
 
     protected $fillable = [

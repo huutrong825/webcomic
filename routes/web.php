@@ -165,14 +165,12 @@ Route::group(
                 Route::get('/chap/{id}', ['uses'=>'ChapController@chapND']);
                 Route::post('/chap/{id}', ['uses'=>'ChapController@themImage']);
                 Route::get('/chap/review/{id}', ['uses'=>'ChapController@reviewImage']);
+                Route::get('/chap/get/{id}', ['uses'=>'ChapController@getChap']);
+                Route::get('/chap/delete/{id}', ['uses'=>'ChapController@deleteChap']);
                 Route::get('/review-chap/{id}', ['uses'=>'ChapController@reviewChap']);
-                Route::get(
-                    '/them-moi', function () {
-                        return view('AdminPage/them-truyen');
-                    }
-                );
+                Route::get('/them-moi', ['uses'=>'TruyenController@viewAdd']);
                 Route::post('/them_moi', ['uses'=>'TruyenController@themTruyen']);
-                Route::post('/them-chap/{id}', ['uses'=>'ChapController@themChap']);
+                Route::post('/them-chap/{id}', ['uses'=>'ChapController@themChap']);                
             }
         );
 
@@ -194,6 +192,8 @@ Route::group(
             ['prefix'=>'truyen-tranh'], function () {
                 Route::get('/', ['uses'=>'TruyenController@truyenTranh']);
                 Route::get('/{id}', ['uses'=>'TruyenController@detail']);
+                Route::get('/getTruyen/{id}', ['uses'=>'TruyenController@getTruyen']);
+                Route::get('/delete/{id}', ['uses'=>'TruyenController@deleteTruyen']);
             }
         );
 
@@ -204,6 +204,8 @@ Route::group(
                 Route::get('/them-nd/{id}', ['uses'=>'ChapController@chapChu']);
                 Route::post('/them-nd/{id}', ['uses'=>'ChapController@themND']);
                 Route::get('/review-chap/{id}', ['uses'=>'ChapController@reviewChapChu']);
+                Route::get('/get-chap/{id}', ['uses'=>'ChapController@getNDChapChu']);
+                Route::put('/update/{id}', ['uses'=>'ChapController@updateND']);
             }
         );
         
@@ -251,12 +253,18 @@ Route::group(
         Route::get('/delete-viewer/{id}', ['uses'=>'ViewerController@deleteUser']);
 
         Route::get('/comment', ['uses'=>'CommentController@list']);
+        Route::get('/comment/get/{id}', ['uses'=>'CommentController@getComment']);
+        Route::get('/comment/deleted/{id}', ['uses'=>'CommentController@deletedComment']);
+
+        Route::get('/error', ['uses'=>'ChapErrorController@listError']);
+
         Route::get('/xep-hang',
         function () {
             return view('AdminPage/xep-hang');}
         );
 
         Route::get('/thong-tin', ['uses'=>'InfoPageController@tongQuan']);
+
         Route::group(
             ['prefix'=>'banner'], function () {
                 Route::get('/fetch', ['uses'=>'InfoPageController@banner']);
@@ -267,11 +275,12 @@ Route::group(
                 Route::get('/delete/{id}', ['uses'=>'InfoPageController@deleteBanner']);
             }
         ); 
+
         Route::group(
             ['prefix'=>'info'], function () {
                 Route::get('/fetch', ['uses'=>'InfoPageController@info']);
                 Route::get('/getInfo', ['uses'=>'InfoPageController@getInfo']);
-                Route::put('/updatetInfo', ['uses'=>'InfoPageController@updateInfo']);
+                Route::post('/updatedInfo', ['uses'=>'InfoPageController@updateInfo']);
             }
         );
         

@@ -97,7 +97,9 @@
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="tab-pane-1">
-                            <textarea class="form-control" id="input-comment" name="text" placeholder="Comment goes here" disabled></textarea>
+                            @foreach($truyen as $t)
+                            <textarea class="form-control" id="input-comment" name="text" placeholder="{{ $t->mo_ta }}" disabled></textarea>
+                            @endforeach
                             </div>
                             <button id="bt-pen3" class="btn btn-outline-success" ><i class="fa fa-edit" ></i></button>
                             <button id="bt-save3" class="btn btn-outline-success" style="display:none;"><i class="fa fa-save" ></i></button>
@@ -129,9 +131,10 @@
                                         @if($tr->loai_truyen == 2)
                                             <a href="/admin/truyen/chap/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-pen"></i></a>
                                         @else
-                                            <a href="/admin/truyen-chu/them-nd/{{ $c->id }}"  style="color:black" tittle=""><i class="fa fa-pen"></i></a>
+                                            <a href="/admin/truyen-chu/them-nd/{{ $c->id }}"  style="color:black" ><i title="Thêm nội dung" class="fa fa-plus"></i></a>
+                                            <a href="/admin/truyen-chu/get-chap/{{ $c->id }}"  style="color:blue" tittle="Edit"><i  title="Edit" class="fa fa-edit"></i></a>
                                         @endif
-                                        <a href="" style="color:red" tittle="Xóa chap"><i class="fa fa-trash"></i></a>
+                                        <a class='bt_xoaChap' style="color:red" title="Xóa chap" value="{{ $c->id }}"><i class="fa fa-trash"></i></a>
                                     </span>                                
                                 </li>
                                 @endforeach
@@ -184,6 +187,24 @@
                             @endforeach
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hide fade in" id="modal_Deleted_Chap" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nhắc nhở</h5>
+                </div>
+                <div class="">
+                    <input type="hidden" class="form-control form-control-user" id='idDeleteChap' >
+                </div>
+                <div class="modal-body">Xác nhận xóa Chap <span id='nameDeleteChap' style="color:blue"></span> (Mọi dữ liệu về chap sẽ bị xóa)</div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary bt_xacnhanxoa_Chap">Xác nhận</a>
+                    <button class="btn btn-danger " type="button" data-dismiss="modal">Cancel</button>                    
                 </div>
             </div>
         </div>

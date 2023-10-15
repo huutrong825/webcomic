@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Chap_Error;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ChapErrorController extends Controller
 {
@@ -43,5 +44,16 @@ class ChapErrorController extends Controller
         } else {
             return response()->json(['errors' => "Phải đăng nhập"]);
         }
+    }
+
+    public function listError()
+    {
+        $error = DB::table('chap_errol as e')
+            ->join('users as u', 'u.id', '=', 'e.id_viewer')
+            ->join('truyen as t', 't.id', '=', 'e.id_truyenloi')
+            ->join('chap as c', 'c.id', '=', 'e.id_chap')
+            ->select('e.id', 'u.name', 't.ten_truyen', 'c.ten_chap', 'e.mess_loi', 'e.created_at')->get();
+        
+        return view('AdminPage.loi-truyen', compact('error'));
     }
 }

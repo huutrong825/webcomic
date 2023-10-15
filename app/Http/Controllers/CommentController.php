@@ -64,4 +64,34 @@ class CommentController extends Controller
             return response()->json(['errors' => "Phải đăng nhập"]);
         }
     }
+
+    public function getComment($id)
+    {
+        $comment = Comment::where('id', $id)->first();
+
+        return response()->json(
+            [
+                'comment' => $comment
+            ]
+        );
+    }
+
+    public function deletedComment($id)
+    {
+        $comment = Comment::where('id', $id)->first();
+
+        if ($comment) {
+
+            $comment->delete();
+
+            return response()->json(
+                [
+                    'message' => "Xóa bình luận thành công"
+                ]
+            );
+            
+        } else {
+            return response()->json(['errors' => 'Không tìm thấy bình luận trong dữ liệu']);
+        }
+    }
 }

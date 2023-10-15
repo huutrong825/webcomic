@@ -10,7 +10,8 @@
             
             <div id="Quy tắc" class="tabcontent">
                 <h3></h3>
-                <p></p>
+                <p>Không dùng những ngôn từ không đúng mực để bình luận</p>
+                <p>Không reup truyện </p>
             </div>
             
             <div id="Thông tin page" class="tabcontent">

@@ -197,7 +197,7 @@ class InfoPageController extends Controller
     public function updateInfo(Request $r)
     {
         try {
-            $info = Info_page::where('id', 1)->first();
+            $info = Info_page::findOrFail(1);
 
             if ($info) {
                 $info->update(

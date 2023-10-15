@@ -285,7 +285,7 @@ $(document).ready(function(){
     $(document).on('click', '#updateInfo', function(e){
         e.preventDefault();
         $.ajax({
-            url:'/admin/info/updatetInfo',
+            url:'/admin/info/updatedInfo',
             type:'post',
             data: new FormData($('#formupdateInfo')[0]),
             contentType: false,

@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Truyen;
 use App\Models\Chap;
 use App\Models\Truyen_Theloai;
+use App\Models\Store_truyen;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 
 class TruyenController extends Controller
 {
+    public function viewAdd()
+    {
+        return view('AdminPage/them-truyen');
+    }
     public function themTruyen(Request $r) 
     {      
         
@@ -52,7 +57,7 @@ class TruyenController extends Controller
         $truyen = DB::table('truyen as t')
             ->leftJoin(DB::raw('(SELECT * FROM chap c JOIN (SELECT h.id_truyen as i, MAX(h.ngay_dang) as d FROM chap h GROUP BY h.id_truyen) as latest_chap ON c.id_truyen = latest_chap.i and c.ngay_dang = latest_chap.d) as m'), 't.id', '=', 'm.id_truyen')
             ->select('t.*', 'm.ten_chap')
-            ->where('t.loai_truyen', 2)->paginate(12);
+            ->where('t.loai_truyen', 2)->orderBy('t.id', 'DESC')->paginate(12);
         // $truyen = DB::select(
         //     'select t.*, m.ten_chap
         //     FROM truyen t
@@ -321,5 +326,51 @@ class TruyenController extends Controller
         {
             return back()->withError($e.getMessage());
         }
+    }
+
+    public function getTruyen($id)
+    {
+        $truyen = Truyen::find($id);
+
+        return response()->json(
+            [
+                'truyen' => $truyen
+            ]
+        );
+    }
+
+    public function deleteTruyen($id)
+    {
+        $truyen = Truyen::findOrFail($id);
+
+        if ($truyen) {
+
+            $chapter = $truyen->chap;
+
+            foreach ($chapter as $ch) {
+                // Xóa nội dung trong chương
+                $ch->chap_nd()->delete();
+                $ch->errol()->delete();
+            }
+
+            // //Xóa các chap truyện
+            $truyen->chap()->delete();
+            // //Xóa các comment truyện
+            $truyen->comment()->delete();
+            // //Xóa các truyện trong store
+            $store = Store_truyen::where('id_truyen', $truyen->id);
+            $store->delete();
+            // //Xóa truyện
+            $truyen->delete();
+
+            return response()->json(
+                [
+                    'message' => 'Xóa truyện thành công'
+                ]
+            );
+        } else {
+            return response()->json(['errors' => "Không tìm thấy truyện"]);
+        }
+        
     }
 }

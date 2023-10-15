@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DamMe - Web truyện</title>    
+    @foreach ($infopage as $i)
+    <title>{{ $i->ten_web }} - {{  $i->tieu_de }}</title> 
+    @endforeach   
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -168,10 +170,10 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="form-group ">
+                        <!-- <div class="form-group ">
                             <input type="password" name='customCheck' placeholder="Mã xác nhận">
                             <label for="customCheck"> Ghi nhớ đăng nhập </label>
-                        </div>
+                        </div> -->
                         <div style="text-align: right">
                             <button style="text-align: center" id="sub_reg" class="btn btn-outline-warning btn-user ">Đăng ký</button>
                             <button style="text-align: center" id="bt-cancel-2" class="btn btn-outline-danger">Hủy</button>
@@ -249,8 +251,10 @@
                 </h5>
                 <p class="mb-4">Mọi thông tin và hình ảnh trên website đều được sưu tầm trên Internet. Chúng tôi không sở hữu hay chịu trách nhiệm bất kỳ thông tin nào trên web này. Nếu làm ảnh hưởng đến cá nhân hay tổ chức nào, khi được yêu cầu, chúng tôi sẽ xem xét và gỡ bỏ ngay lập tức.</p>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i></p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>1851050158trong@ou.edu.vn</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                @foreach ($infopage as $i)
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{ $i->email }}</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>{{ $i->phone }}</p>
+                @endforeach                
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">

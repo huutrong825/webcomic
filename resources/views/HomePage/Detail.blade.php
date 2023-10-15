@@ -58,7 +58,7 @@
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class=" mr-3">
-                            <a class="btn btn-outline-success px-3 {{ $min_chap == null ? 'isDisabled': '' }}" href="{{ asset('/truyen') }}/{{ $min_chap }}"><i class="fa fa-book mr-1"></i>Đọc từ đầu</a>
+                            <a class="btn btn-outline-success px-3 {{ $min_chap == null ? 'isDisabled': '' }}" href="{{ asset('/truyen/chap') }}/{{ $min_chap }}"><i class="fa fa-book mr-1"></i>Đọc từ đầu</a>
                         </div>
                         <div class=" mr-3">
                             @php

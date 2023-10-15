@@ -15,7 +15,7 @@ class ViewerController extends Controller
 {
     public function list()
     {
-        $viewer = User::where('group_role', 3)->get();
+        $viewer = User::where('group_role', 3)->paginate(12);
 
         return view('AdminPage/viewer', compact('viewer'));
     }

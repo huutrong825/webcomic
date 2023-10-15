@@ -33,7 +33,7 @@
                 </div>
                 <div class="p-2 mr-3">
                     @foreach ($title as $t)
-                        <a class="btn btn-outline-success px-3 {{ $t->id == $min_chap ? 'isDisabled': '' }}" href="{{ asset('/truyen') }}/{{ $pre_chap }}"><i class="fa fa-arrow-left mr-1"></i>Chap trước</a>
+                        <a class="btn btn-outline-success px-3 {{ $t->id == $min_chap ? 'isDisabled': '' }}" href="{{ asset('/truyen/chap') }}/{{ $pre_chap }}"><i class="fa fa-arrow-left mr-1"></i>Chap trước</a>
                     @endforeach
                 </div>
                 <div class="p-2 mr-3">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="p-2 mr-3">
                     @foreach ($title as $t)
-                        <a class="btn btn-outline-danger px-3 {{ $t->id == $max_chap ? 'isDisabled': '' }}"  href="{{ asset('/truyen') }}/{{ $next_chap }}"> Chap sau <i class="fa fa-arrow-right mr-1"></i></a>
+                        <a class="btn btn-outline-danger px-3 {{ $t->id == $max_chap ? 'isDisabled': '' }}"  href="{{ asset('/truyen/chap') }}/{{ $next_chap }}"> Chap sau <i class="fa fa-arrow-right mr-1"></i></a>
                     @endforeach
                 </div>
             </div>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="p-2 mr-3">
                     @foreach ($title as $t)
-                        <a class="btn btn-outline-success px-3 {{ $t->id == $min_chap ? 'isDisabled': '' }}" href="{{ asset('/truyen') }}/{{ $pre_chap }}"><i class="fa fa-arrow-left mr-1"></i>Chap trước</a>
+                        <a class="btn btn-outline-success px-3 {{ $t->id == $min_chap ? 'isDisabled': '' }}" href="{{ asset('/truyen/chap') }}/{{ $pre_chap }}"><i class="fa fa-arrow-left mr-1"></i>Chap trước</a>
                     @endforeach
                 </div>
                 <div class="p-2 mr-3">
@@ -115,7 +115,7 @@
                 </div>
                 <div class="p-2 mr-3">
                     @foreach ($title as $t)
-                        <a class="btn btn-outline-danger px-3 {{ $t->id == $max_chap ? 'isDisabled': '' }}"  href="{{ asset('/truyen') }}/{{ $next_chap }}"> Chap sau <i class="fa fa-arrow-right mr-1"></i></a>
+                        <a class="btn btn-outline-danger px-3 {{ $t->id == $max_chap ? 'isDisabled': '' }}"  href="{{ asset('/truyen/chap') }}/{{ $next_chap }}"> Chap sau <i class="fa fa-arrow-right mr-1"></i></a>
                     @endforeach
                 </div>
             </div>

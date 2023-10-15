@@ -96,7 +96,6 @@ class ChapController extends Controller
         return view('AdminPage/review-chap', compact('img', 'title'));
     }
 
-
     public function chapChu($id)
     {
         $chap =  DB::table('truyen')
@@ -131,5 +130,71 @@ class ChapController extends Controller
             ->select('truyen.ten_truyen', 'chap.ten_chap')
             ->groupBy('truyen.ten_truyen', 'chap.ten_chap')->get();
         return view('AdminPage/review-chap-chu', compact('noidung', 'title'));
+    }
+
+    public function getNDChapChu($id)
+    {
+        $noidung = Chap_noi_dung::where('id_chap', $id)->get();
+
+        $title = DB::table('truyen')
+            ->join('chap', 'truyen.id', '=', 'chap.id_truyen')
+            ->where('chap.id', $id)
+            ->select('truyen.ten_truyen', 'chap.ten_chap', 'chap.id')
+            ->groupBy('truyen.ten_truyen', 'chap.ten_chap', 'chap.id')->get();
+
+        return view('AdminPage.chinh_nd_chu', compact('noidung', 'title'));
+    }
+
+    public function updateND(Request $r, $id)
+    {
+
+        $chapND = Chap_noi_dung::findOrFail($id);
+
+        if ($chapND) {
+
+            $chapND->update(
+                [
+                    'noi_dung' => $r->nameChap
+                ]
+            );
+
+            return response()->json(
+                [
+                    'message' => 'Cập nhật thành công'
+                ]
+            );
+        } else {
+            return response()->json(['errors' => "Không tìm thấy nội dung truyện"]);
+        }
+    }
+
+    public function getChap($id)
+    {
+        $chap = Chap::findOrFail($id);
+
+        return response()->json(['chap' => $chap]);
+    }
+
+    public function deleteChap($id)
+    {
+        $chap = Chap::findOrFail($id);
+
+        if ($chap) {
+
+            $chap->chap_nd()->delete();
+
+            $chap->errol()->delete();
+
+            $chap->delete();
+
+            return response()->json(
+                [
+                    'message' => 'Xóa chap thành công'
+                ]
+            );
+        } else {
+            return response()->json(['errors' => "Không tìm thấy chap"]);
+        }
+        
     }
 }

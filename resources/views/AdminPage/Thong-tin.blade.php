@@ -114,7 +114,6 @@
                     <div class="modal-body ">
                         <div class="table-responsive col-sm">
                             <form class="user" id='formupdateInfo' >
-                                <fieldset>
                                     <div class="form-group">
                                         <lable>Email page:</lable>
                                         <input type="text" class="form-control form-control-user" id='email' name="email">
@@ -131,7 +130,6 @@
                                         <lable>Tiêu đề page:</lable>
                                         <input type="text" class="form-control form-control-user" id='tieu_de' name="tieu_de">
                                     </div>
-                                </fieldset>
                                 <div class="form-group" style="text-align: right">
                                     <a class="btn btn-success btn-user " id="updateInfo"> Cập nhật</a>
                                     <a class="btn btn-danger btn-user" id="cancelInfo">Hủy</a>

@@ -248,7 +248,7 @@ $(document).ready(function(){
         e.preventDefault();
         $('form :input').val('');
         $('#modal_them_chap').modal('hide');
-    });
+    });    
 
     $(document).on('click','#bt-av', function(e){
         e.preventDefault();
@@ -285,9 +285,18 @@ $(document).ready(function(){
                     location.reload();
                 }, 1000);
             },
-            error: function ()
+            error: function (xhr)
             {
-                alertify.error('Thêm thất bại');
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
             }
         });
     });
@@ -313,9 +322,162 @@ $(document).ready(function(){
                 // $('#formThemTruyen').trigger("reset");
                 $('form :input').trigger("reset");
             },
-            error: function ()
+            error: function (xhr)
             {
-                alertify.error('Thêm thất bại');
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    });
+
+    //Xóa truyện
+    $(document).on('click', '.bt_xoaTruyen', function(e)
+    {
+        e.preventDefault();
+        var id = $(this).attr('value');
+        $('#modal_Deleted_Truyen').modal('show');
+        $.ajax({
+            url : '/admin/truyen-tranh/getTruyen/' + id,
+            type : 'get',
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                $('#idDeleteTruyen').val(response.truyen.id);
+                $('#nameDeleteTruyen').html(response.truyen.ten_truyen); 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.bt_xacnhanxoa_Truyen', function(e)
+    {
+        e.preventDefault();
+        var id = $('#idDeleteTruyen').val();
+        $.ajax({
+            url : '/admin/truyen-tranh/delete/' + id,
+            type : 'get',
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                if (response.errors) {
+                    alertify.error(response.errors);
+                } else {
+                    alertify.success(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    });
+
+    //Xóa chap
+    $(document).on('click', '.bt_xoaChap', function(e)
+    {
+        e.preventDefault();
+        var id = $(this).attr('value');
+        $('#modal_Deleted_Chap').modal('show');
+        $.ajax({
+            url : '/admin/truyen/chap/get/' + id,
+            type : 'get',
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                $('#idDeleteChap').val(response.chap.id);
+                $('#nameDeleteChap').html(response.chap.ten_chap); 
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.bt_xacnhanxoa_Chap', function(e)
+    {
+        e.preventDefault();
+        var id = $('#idDeleteChap').val();
+        $.ajax({
+            url : '/admin/truyen/chap/delete/' + id,
+            type : 'get',
+            dataType : 'json',
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response)
+            {  
+                if (response.errors) {
+                    alertify.error(response.errors);
+                } else {
+                    alertify.success(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function (xhr)
+            {
+                var errors = xhr.responseJSON.errors;
+
+                // Hiển thị thông báo lỗi
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field][0];
+                        // Xử lý hiển thị thông báo lỗi cho từng trường
+                        alertify.error(errorMessage);
+                    }
+                }
             }
         });
     });
