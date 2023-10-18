@@ -1,0 +1,14 @@
+#project yêu cầu cài xampp, composer, laravel ~ 9.0
+
+- Cài Xampp (để sử dụng database mysql)
+- Cài composer: https://getcomposer.org/download/
+- Cài Laravel: trong cửa sổ command prompt, gõ lệnh composer global require "laravel/installer"
+
+Chạy Xampp: khởi động apache và mySQL
+Tạo database: Truy cập localhost:8000/phpmyadmin, chọn import, chọn file db_webcomic.sql
+Chạy Laravel service: chuyển đến thư mục ứng dụng web, gõ lệnh php artisan serve
+(Nếu sử dụng VS Code, chạy lệnh php artisan serve trong terminal)
+
+Tài khoản test:
+Admin: admin@gmail.com, Mk:1234567
+User: user@gmail.com, Mk:123456
